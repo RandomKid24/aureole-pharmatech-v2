@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CAREERS_CONTENT, CONTACT_INFO, NAV_LINKS } from '../constants';
 import { Briefcase, TrendingUp, Lightbulb, Heart, ChevronDown, CheckCircle2, MapPin, Clock } from 'lucide-react';
 
 const Careers: React.FC = () => {
   const [expandedJob, setExpandedJob] = useState<number | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggleJob = (index: number) => {
     if (expandedJob === index) {
@@ -19,22 +24,29 @@ const Careers: React.FC = () => {
       {/* ========================================================
           HERO SECTION
          ======================================================== */}
-      <section className="relative px-6 md:px-24 py-24 bg-white border-b border-gray-100 overflow-hidden">
-         {/* Decorative Background Text */}
-         <div className="absolute top-0 right-0 text-[10rem] md:text-[20rem] font-black text-gray-50 pointer-events-none select-none z-0 leading-none opacity-50 transform translate-x-1/4 -translate-y-1/4">
-            JOIN
-         </div>
+      <section className="relative px-6 md:px-24 py-24 bg-[#F8F9FA] border-b border-gray-200 overflow-hidden">
          
          <div className="relative z-10 max-w-4xl">
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-gray-900 mb-8 uppercase">
-              Join Our<br/><span className="text-aureole">Team</span>
+            <h1 className="text-[10vw] md:text-[8vw] font-black tracking-tighter text-gray-900 mb-8 uppercase leading-[0.8] select-none">
+               <span className={`block transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+                 Join
+               </span>
+               <span className={`block transition-transform duration-1000 delay-100 ease-[cubic-bezier(0.16,1,0.3,1)] ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+                 Our
+               </span>
+               <span className={`block text-aureole transition-transform duration-1000 delay-200 ease-[cubic-bezier(0.16,1,0.3,1)] ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+                 Team
+               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-500 leading-relaxed mb-8 max-w-2xl border-l-4 border-aureole pl-6">
-              {CAREERS_CONTENT.hero.subtitle}
-            </p>
-            <p className="text-lg text-gray-400">
-               {CAREERS_CONTENT.hero.text}
-            </p>
+            
+            <div className={`transition-all duration-1000 delay-500 transform ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+               <p className="text-xl md:text-2xl text-gray-500 leading-relaxed mb-8 max-w-2xl border-l-4 border-aureole pl-6">
+                 {CAREERS_CONTENT.hero.subtitle}
+               </p>
+               <p className="text-lg text-gray-400">
+                  {CAREERS_CONTENT.hero.text}
+               </p>
+            </div>
          </div>
       </section>
 

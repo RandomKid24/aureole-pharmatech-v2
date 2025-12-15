@@ -51,7 +51,7 @@ const MagneticCTA: React.FC = () => {
   }, []);
 
   return (
-    <footer className="bg-white min-h-[80vh] flex flex-col justify-between" id="contact">
+    <footer className="bg-white min-h-[80vh] flex flex-col justify-between border-t border-gray-200" id="contact">
       {/* ========================================================
           LARGE CTA SECTION
          ======================================================== */}
@@ -63,9 +63,9 @@ const MagneticCTA: React.FC = () => {
         </div>
 
         <div className="text-center z-10 mb-12">
-           <p className="text-gray-500 mb-4 tracking-widest uppercase text-sm">Start your transformation</p>
+           <p className="text-gray-500 mb-4 tracking-widest uppercase text-sm">Excellence in Pharmaceutical Technology</p>
            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 tracking-tighter">
-             Ready for kinetic<br/>precision?
+             Partner with<br/>Aureole
            </h2>
         </div>
 

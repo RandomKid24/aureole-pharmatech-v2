@@ -7,6 +7,23 @@ interface NavbarProps {
   currentPage: string;
 }
 
+const Logo = () => (
+  <div className="flex items-center gap-3 select-none">
+    {/* Logo Image */}
+    <img 
+      src="/logo.png" 
+      alt="Aureole Pharma-Tech" 
+      className="h-10 md:h-12 w-auto object-contain"
+    />
+    
+    {/* Brand Text */}
+    <div className="flex flex-col justify-center -space-y-1">
+       <span className="text-2xl md:text-3xl font-light text-aureole lowercase tracking-tight leading-none" style={{ fontFamily: 'Poppins, sans-serif' }}>aureole</span>
+       <span className="text-[8px] md:text-[10px] font-semibold text-gray-500 tracking-[0.2em] uppercase pl-0.5">Pharma-Tech</span>
+    </div>
+  </div>
+);
+
 const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -65,29 +82,30 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
     if (currentPage === 'software' && link.action === 'software') return true;
     if (currentPage === 'careers' && link.action === 'careers') return true;
     if (currentPage === 'home' && link.action === 'home' && link.href === '#home') return true;
-    // For other sections on home page, strictly speaking we might want scroll spy, but this covers basic page active states
     return false;
   };
 
-  return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled || currentPage !== 'home' ? 'bg-white/90 backdrop-blur-md border-b border-gray-100 py-4' : 'bg-transparent py-6'}`}>
-      <div className="container mx-auto px-6 flex justify-between items-center">
-        <div 
-          className="flex items-center gap-2 cursor-pointer"
-          onClick={(e) => handleLinkClick(e, 'home', '#home')}
-        >
-           <div className="w-8 h-8 bg-aureole rounded-full"></div>
-           <span className="font-bold text-xl tracking-tighter text-gray-900 uppercase">Aureole Pharmatech</span>
-        </div>
+  // Split links for Desktop layout
+  // Left: Home, About, Products, Services (4 items)
+  // Right: Software, Events, Careers (3 items)
+  const splitIndex = 4;
+  const leftLinks = NAV_LINKS.slice(0, splitIndex);
+  const rightLinks = NAV_LINKS.slice(splitIndex);
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-12">
-          {NAV_LINKS.map((link) => (
+  return (
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled || currentPage !== 'home' ? 'bg-white/95 backdrop-blur-md border-b border-gray-100 py-2 shadow-sm' : 'bg-transparent py-6'}`}>
+      <div className="container mx-auto px-6 h-16 md:h-20 flex items-center justify-center md:justify-between relative">
+        
+        {/* =======================
+            DESKTOP LEFT NAV
+           ======================= */}
+        <div className="hidden md:flex flex-1 items-center justify-end gap-8 pr-12">
+          {leftLinks.map((link) => (
             <a 
               key={link.label} 
               href={link.href} 
               onClick={(e) => handleLinkClick(e, link.action, link.href)}
-              className={`text-sm font-medium transition-colors tracking-tight uppercase ${
+              className={`text-sm font-medium transition-all duration-300 tracking-tight uppercase hover:-translate-y-0.5 ${
                 isLinkActive(link) ? 'text-aureole font-bold' : 'text-gray-600 hover:text-aureole'
               }`}
             >
@@ -96,20 +114,55 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
           ))}
         </div>
 
-        {/* Mobile Toggle */}
-        <button className="md:hidden text-gray-900" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-          {mobileMenuOpen ? <X /> : <Menu />}
-        </button>
+        {/* =======================
+            CENTER LOGO
+           ======================= */}
+        <div 
+          className="cursor-pointer flex-shrink-0 z-20"
+          onClick={(e) => handleLinkClick(e, 'home', '#home')}
+        >
+           <Logo />
+        </div>
+
+        {/* =======================
+            DESKTOP RIGHT NAV
+           ======================= */}
+        <div className="hidden md:flex flex-1 items-center justify-start gap-8 pl-12">
+          {rightLinks.map((link) => (
+            <a 
+              key={link.label} 
+              href={link.href} 
+              onClick={(e) => handleLinkClick(e, link.action, link.href)}
+              className={`text-sm font-medium transition-all duration-300 tracking-tight uppercase hover:-translate-y-0.5 ${
+                isLinkActive(link) ? 'text-aureole font-bold' : 'text-gray-600 hover:text-aureole'
+              }`}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        {/* =======================
+            MOBILE MENU TOGGLE
+            Absolute positioned to stay on the right while logo is centered
+           ======================= */}
+        <div className="md:hidden absolute right-6 top-1/2 -translate-y-1/2 z-30">
+          <button className="text-gray-900 hover:text-aureole transition-colors p-2" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* =======================
+          MOBILE MENU DROPDOWN
+         ======================= */}
       {mobileMenuOpen && (
-        <div className="absolute top-full left-0 w-full bg-white border-b border-gray-100 md:hidden p-6 flex flex-col gap-4 shadow-xl">
+        <div className="absolute top-full left-0 w-full bg-white border-b border-gray-100 md:hidden flex flex-col shadow-2xl animate-in slide-in-from-top-5 duration-200 h-[calc(100vh-80px)] overflow-y-auto">
            {NAV_LINKS.map((link) => (
             <a 
               key={link.label} 
               href={link.href} 
-              className={`text-lg font-medium py-2 border-b border-gray-50 last:border-0 ${isLinkActive(link) ? 'text-aureole' : 'text-gray-900'}`}
+              className={`text-xl font-medium py-6 px-8 border-b border-gray-50 last:border-0 hover:bg-gray-50 text-center ${isLinkActive(link) ? 'text-aureole bg-blue-50/50' : 'text-gray-900'}`}
               onClick={(e) => handleLinkClick(e, link.action, link.href)}
             >
               {link.label}

@@ -1,27 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PRODUCT_STANDARDS, PRODUCT_CATALOG, CONTACT_INFO, NAV_LINKS } from '../constants';
 import { Shield, FileCheck, CheckCircle2, ChevronRight, Hexagon, ArrowRight } from 'lucide-react';
 
 const Products: React.FC = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <div className="bg-surface w-full overflow-x-hidden pt-20">
       
       {/* ========================================================
           HERO SECTION
          ======================================================== */}
-      <section className="relative px-6 md:px-24 py-20 bg-white border-b border-gray-100 overflow-hidden">
-         {/* Decorative Background Text */}
-         <div className="absolute top-0 right-0 text-[10rem] md:text-[20rem] font-black text-gray-50 pointer-events-none select-none z-0 leading-none opacity-50 transform translate-x-1/4 -translate-y-1/4">
-            PRO
-         </div>
+      <section className="relative px-6 md:px-24 py-24 md:py-32 bg-[#F8F9FA] border-b border-gray-200 overflow-hidden min-h-[70vh] flex flex-col justify-center">
          
-         <div className="relative z-10 max-w-4xl">
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-gray-900 mb-8 uppercase">
-              Our<br/><span className="text-aureole">Products</span>
+         <div className="relative z-10 w-full">
+            
+            <div className={`mb-8 transition-all duration-1000 transform ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+               <span className="inline-block px-3 py-1 border border-aureole/20 rounded-full text-xs tracking-widest uppercase text-aureole w-fit">
+                 Catalog 2024
+               </span>
+            </div>
+
+            <h1 className="text-[12vw] font-black tracking-tighter text-gray-900 mb-8 uppercase leading-[0.8] select-none">
+              <span className={`block transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+                Our
+              </span>
+              <span className={`block text-aureole transition-transform duration-1000 delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+                Products
+              </span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-500 leading-relaxed mb-12">
-              Our products are manufactured according to international standards and regulatory requirements. Ensuring the highest standards of quality and regulatory compliance.
-            </p>
+            
+            <div className={`transition-all duration-1000 delay-500 transform ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+               <p className="text-xl md:text-2xl text-gray-500 leading-relaxed max-w-2xl border-l-4 border-aureole pl-6">
+                 Engineered to international standards and regulatory requirements. Ensuring the highest standards of quality and regulatory compliance.
+               </p>
+            </div>
          </div>
       </section>
 

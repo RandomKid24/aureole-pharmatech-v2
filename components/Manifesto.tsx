@@ -6,7 +6,7 @@ const Manifesto: React.FC = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section className="bg-surface py-32 px-6 md:px-24" id="manifesto">
+    <section className="bg-[#F8F9FA] py-32 px-6 md:px-24 border-t border-gray-200" id="manifesto">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 md:gap-32">
         
         {/* ========================================================

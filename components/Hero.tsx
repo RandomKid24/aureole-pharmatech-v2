@@ -1,80 +1,102 @@
 import React, { useEffect, useState } from 'react';
-
-// ========================================================
-// HERO ANIMATED WORDS
-// Edit these words to change the rotating headline.
-// ========================================================
-const WORDS = ["EXCELLENCE", "INTEGRITY", "INNOVATION"];
+import { ArrowRight } from 'lucide-react';
 
 const Hero: React.FC = () => {
-  const [activeWordIndex, setActiveWordIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
-  // Cycle through words every 8 seconds
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveWordIndex((prev) => (prev + 1) % WORDS.length);
-    }, 8000);
-    return () => clearInterval(interval);
+    setMounted(true);
   }, []);
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col md:flex-row pt-20 md:pt-0">
+    <section className="relative w-full min-h-screen flex flex-col justify-center bg-[#F8F9FA] overflow-hidden pt-20">
       
       {/* ========================================================
-          LEFT SIDE: TEXT CONTENT
+          ANIMATED BACKGROUND
          ======================================================== */}
-      <div className="w-full md:w-1/2 bg-surface flex flex-col justify-center px-8 md:px-24 py-20 order-2 md:order-1">
-        <h2 className="text-aureole font-bold tracking-widest text-sm mb-6 uppercase">Since 1996</h2>
+      <style>{`
+        @keyframes drift {
+          0% { transform: translate(0, 0); }
+          50% { transform: translate(20px, 20px); }
+          100% { transform: translate(0, 0); }
+        }
+        .animate-drift {
+          animation: drift 20s infinite ease-in-out;
+        }
+      `}</style>
+
+      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
         
-        {/* Animated Headline */}
-        <div className="h-32 md:h-48 relative overflow-hidden">
-          {WORDS.map((word, index) => (
-            <h1
-              key={word}
-              className={`absolute top-0 left-0 text-6xl md:text-8xl font-black tracking-tighter text-gray-900 transition-all duration-[1500ms] ease-in-out transform ${
-                index === activeWordIndex 
-                  ? 'opacity-100 translate-y-0' 
-                  : index < activeWordIndex 
-                    ? 'opacity-0 -translate-y-full' 
-                    : 'opacity-0 translate-y-full'
-              }`}
-            >
-              {word}
-            </h1>
-          ))}
-        </div>
+        {/* Dynamic Gradient Blobs */}
+        <div className="absolute -top-[10%] -right-[10%] w-[40vw] h-[40vw] bg-aureole/5 rounded-full blur-[100px] animate-drift"></div>
+        <div className="absolute top-[20%] -left-[10%] w-[30vw] h-[30vw] bg-blue-300/10 rounded-full blur-[80px] animate-drift" style={{ animationDelay: '5s', animationDirection: 'reverse' }}></div>
+        <div className="absolute -bottom-[20%] left-[20%] w-[50vw] h-[50vw] bg-aureole/5 rounded-full blur-[120px] animate-drift" style={{ animationDelay: '10s' }}></div>
+      </div>
 
-        {/* Subtitle / Description */}
-        <p className="mt-8 text-xl text-gray-500 max-w-md leading-relaxed">
-          Engineering Precision in Pharmaceutical Technology. Where excellence is not just a goal, it’s our guiding light.
-        </p>
+      <div className="container mx-auto px-6 relative z-10">
+        
+        {/* =======================
+            MAIN TYPOGRAPHY
+           ======================= */}
+        <div className="flex flex-col items-start max-w-[95vw]">
+          
+          {/* Top Label */}
+          <div className={`mb-4 md:mb-8 transition-all duration-1000 transform ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+             <span className="inline-block text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-aureole border-b border-aureole pb-2 bg-white/50 backdrop-blur-sm pr-2">
+                Est. 1996 • Global Leader
+             </span>
+          </div>
 
-        {/* Quick Stats */}
-        <div className="mt-12 flex gap-8">
-           <div className="flex flex-col gap-2">
-              <span className="text-3xl font-bold text-gray-900">28 Years</span>
-              <span className="text-xs uppercase tracking-wider text-gray-400">Experience</span>
-           </div>
-           <div className="flex flex-col gap-2">
-              <span className="text-3xl font-bold text-gray-900">ICH/21 CFR</span>
-              <span className="text-xs uppercase tracking-wider text-gray-400">Compliant</span>
-           </div>
+          {/* Massive Text Block */}
+          <h1 className="text-[13vw] md:text-[12vw] font-black leading-[0.8] tracking-tighter text-gray-900 select-none flex flex-col items-start w-full mix-blend-multiply">
+             <span className={`block transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+               PRECISION
+             </span>
+             <span className={`block text-aureole transition-transform duration-1000 delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+               MATTERS
+             </span>
+          </h1>
+
+          {/* Description & CTA */}
+          <div className="mt-16 w-full flex flex-col md:flex-row md:items-end justify-between gap-12 border-t border-gray-200/60 pt-12">
+             
+             <div className={`max-w-2xl transition-all duration-1000 delay-500 transform ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+                <p className="text-lg md:text-2xl text-gray-500 font-light leading-relaxed">
+                   We engineer the environmental conditions that allow science to thrive. 
+                   <strong className="text-gray-900 font-medium"> World-class stability chambers</strong> and 
+                   <strong className="text-gray-900 font-medium"> laboratory instruments</strong> for the pharmaceutical industry.
+                </p>
+             </div>
+
+             <div className={`flex items-center gap-6 transition-all duration-1000 delay-700 transform ${mounted ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
+                <div className="flex flex-col items-end">
+                  <span className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 text-right">
+                     Discover<br/>Collection
+                  </span>
+                </div>
+                <a 
+                   href="#products"
+                   className="group relative inline-flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full border border-gray-200 bg-white hover:border-aureole hover:bg-aureole transition-all duration-300 shadow-sm"
+                >
+                   <ArrowRight className="w-8 h-8 md:w-10 md:h-10 text-gray-900 group-hover:text-white -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
+                </a>
+             </div>
+
+          </div>
+
         </div>
       </div>
 
-      {/* ========================================================
-          RIGHT SIDE: HERO IMAGE
-          Edit the src attribute below to change the main hero image.
-         ======================================================== */}
-      <div className="w-full md:w-1/2 h-[50vh] md:h-screen relative order-1 md:order-2 overflow-hidden bg-slate-900">
-        <img 
-          src="https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=2000&auto=format&fit=crop" 
-          alt="Pharmaceutical Laboratory" 
-          className="w-full h-full object-cover"
-        />
-        {/* Overlay to blend image with brand color */}
-        <div className="absolute inset-0 bg-aureole/10 mix-blend-multiply"></div>
+      {/* =======================
+          SCROLL INDICATOR
+         ======================= */}
+      <div className={`absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 transition-opacity duration-1000 delay-1000 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
+         <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400">Scroll</span>
+         <div className="w-px h-16 bg-gray-200 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1/2 bg-aureole animate-[drop_2s_infinite]"></div>
+         </div>
       </div>
+
     </section>
   );
 };

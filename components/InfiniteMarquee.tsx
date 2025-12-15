@@ -1,28 +1,28 @@
 import React from 'react';
-import { MARQUEE_TEXT } from '../constants';
-import { Boxes, Zap, Shield, Microscope, Globe } from 'lucide-react';
 
 const InfiniteMarquee: React.FC = () => {
   return (
-    <div className="w-full bg-aureole text-white py-6 overflow-hidden relative flex items-center">
-      <div className="flex whitespace-nowrap animate-marquee">
+    <div className="w-full bg-aureole py-8 overflow-hidden relative border-y border-white/10 z-20">
+      <div className="flex whitespace-nowrap animate-marquee group">
         {[...Array(4)].map((_, i) => (
           <div key={i} className="flex items-center mx-4">
-            <span className="text-lg font-bold tracking-widest uppercase flex items-center gap-8">
-               {MARQUEE_TEXT}
-               <Boxes className="w-6 h-6 inline-block" />
-               <span className="mx-4"></span>
-               {MARQUEE_TEXT}
-               <Zap className="w-6 h-6 inline-block" />
-               <span className="mx-4"></span>
-               {MARQUEE_TEXT}
-               <Shield className="w-6 h-6 inline-block" />
-               <span className="mx-4"></span>
-               {MARQUEE_TEXT}
-               <Microscope className="w-6 h-6 inline-block" />
-               <span className="mx-4"></span>
-               {MARQUEE_TEXT}
-               <Globe className="w-6 h-6 inline-block" />
+            <span className="text-3xl md:text-5xl font-black tracking-tight uppercase flex items-center gap-16 text-white/90">
+               <span>AUROBINDO</span>
+               <span className="w-3 h-3 rounded-full bg-white/30"></span>
+               <span>DABUR</span>
+               <span className="w-3 h-3 rounded-full bg-white/30"></span>
+               <span>INTAS</span>
+               <span className="w-3 h-3 rounded-full bg-white/30"></span>
+               <span>ERIS</span>
+               <span className="w-3 h-3 rounded-full bg-white/30"></span>
+               <span>TCG LIFESCIENCES</span>
+               <span className="w-3 h-3 rounded-full bg-white/30"></span>
+               <span>RECIPHARM</span>
+               <span className="w-3 h-3 rounded-full bg-white/30"></span>
+               <span>HETERO</span>
+               <span className="w-3 h-3 rounded-full bg-white/30"></span>
+               <span>MERIL</span>
+               <span className="w-3 h-3 rounded-full bg-white/30"></span>
             </span>
           </div>
         ))}
