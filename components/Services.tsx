@@ -17,16 +17,16 @@ const Services: React.FC = () => {
     <div className="bg-surface w-full overflow-x-hidden pt-20">
       
       {/* ========================================================
-          HERO SECTION (Redesigned 1:1 match with Home Hero)
+          HERO SECTION (Standardized to min-h-screen)
          ======================================================== */}
-      <section className="relative w-full min-h-[85vh] md:min-h-screen flex flex-col justify-center bg-[#F8F9FA] overflow-hidden pt-10 md:pt-20">
+      <section className="relative w-full min-h-screen flex flex-col justify-center bg-[#F8F9FA] overflow-hidden pt-20">
          
          <div className="container mx-auto px-6 relative z-10">
             <div className="flex flex-col items-start max-w-full md:max-w-[95vw]">
                
                {/* Top Label */}
                <div className={`mb-4 md:mb-8 transition-all duration-1000 transform ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                  <span className="inline-block text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-aureole border-b border-aureole pb-2">
+                  <span className="inline-block text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-aureole border-b border-aureole pb-2 bg-[#F8F9FA]/50 backdrop-blur-sm pr-2">
                      Global Support
                   </span>
                </div>
@@ -42,7 +42,7 @@ const Services: React.FC = () => {
                </h1>
                
                {/* Description & CTA Area */}
-               <div className="mt-12 md:mt-16 w-full flex flex-col md:flex-row md:items-end justify-between gap-8 md:gap-12 border-t border-gray-200 pt-8 md:pt-12">
+               <div className="mt-12 md:mt-16 w-full flex flex-col md:flex-row md:items-end justify-between gap-8 md:gap-12 border-t border-gray-200 pt-8 md:pt-12 bg-[#F8F9FA]/80 backdrop-blur-sm pl-0">
                   <div className={`max-w-2xl transition-all duration-1000 delay-500 transform ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
                      <p className="text-lg md:text-2xl text-gray-500 font-light leading-relaxed">
                        {SERVICE_INTRO.subtitle}
@@ -102,7 +102,8 @@ const Services: React.FC = () => {
                        <h3 className="text-lg md:text-xl font-bold text-gray-900 uppercase tracking-tight mb-3 md:mb-4 group-hover:text-aureole transition-colors duration-500">
                           {feature.title}
                        </h3>
-                       <p className="text-sm text-gray-500 leading-relaxed group-hover:text-gray-600 transition-colors duration-500 line-clamp-4 group-hover:line-clamp-none">
+                       {/* Removed line-clamp-4 and group-hover:line-clamp-none to prevent layout jumps */}
+                       <p className="text-sm text-gray-500 leading-relaxed group-hover:text-gray-600 transition-colors duration-500">
                           {feature.description}
                        </p>
                     </div>
@@ -157,11 +158,27 @@ const Services: React.FC = () => {
       </section>
 
       {/* ========================================================
+          LOCATION MAP
+         ======================================================== */}
+      <section className="h-[250px] w-full bg-gray-200 relative group border-t border-b border-gray-200">
+        <iframe 
+          src="https://maps.google.com/maps?q=Plot%20No.%20B%20%E2%80%93%2061%2C%20Malegaon%20MIDC%2C%20Tal%20%E2%80%93%20Sinnar%2C%20Dist%20%E2%80%93%20Nashik%20422%20113%20Maharashtra%2C%20India&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+          width="100%" 
+          height="100%" 
+          style={{ border: 0, filter: 'grayscale(100%)' }} 
+          allowFullScreen 
+          loading="lazy"
+          title="Aureole Location"
+          className="group-hover:grayscale-0 transition-all duration-700"
+        ></iframe>
+      </section>
+
+      {/* ========================================================
           FOOTER (Light Theme - Matched to Landing Page)
          ======================================================== */}
       <footer className="w-full py-12 bg-gray-50 border-t border-gray-200 text-gray-900">
         <div className="container mx-auto px-6 md:px-24">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-8">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-start gap-8 mb-8">
              <div className="text-gray-500 text-sm leading-relaxed">
                <h4 className="text-gray-900 font-bold uppercase tracking-widest mb-2">Headquarters</h4>
                <p>{CONTACT_INFO.address}</p>
@@ -169,16 +186,23 @@ const Services: React.FC = () => {
                <p className="text-aureole">{CONTACT_INFO.email}</p>
              </div>
              
-             {/* Quick Links */}
-             <div className="flex flex-col md:flex-row gap-8 md:gap-16">
+             {/* Categorized Links */}
+             <div className="flex flex-row gap-12 md:gap-24">
                  <div>
-                    <h4 className="text-gray-900 font-bold uppercase tracking-widest mb-4 text-xs">Menu</h4>
+                    <h4 className="text-gray-900 font-bold uppercase tracking-widest mb-4 text-xs">Company</h4>
                     <ul className="flex flex-col gap-2">
-                        {NAV_LINKS.map(link => (
-                           <li key={link.label}>
-                             <a href={link.href} className="text-gray-500 hover:text-aureole transition-colors text-sm">{link.label}</a>
-                           </li>
-                        ))}
+                       <li><a href="#home" className="text-gray-500 hover:text-aureole transition-colors text-sm">Home</a></li>
+                       <li><a href="#about" className="text-gray-500 hover:text-aureole transition-colors text-sm">About</a></li>
+                       <li><a href="#careers" className="text-gray-500 hover:text-aureole transition-colors text-sm">Careers</a></li>
+                       <li><a href="#events" className="text-gray-500 hover:text-aureole transition-colors text-sm">Events</a></li>
+                    </ul>
+                 </div>
+                 <div>
+                    <h4 className="text-gray-900 font-bold uppercase tracking-widest mb-4 text-xs">Resources</h4>
+                    <ul className="flex flex-col gap-2">
+                       <li><a href="#products" className="text-gray-500 hover:text-aureole transition-colors text-sm">Products</a></li>
+                       <li><a href="#services" className="text-gray-500 hover:text-aureole transition-colors text-sm">Services</a></li>
+                       <li><a href="#software" className="text-gray-500 hover:text-aureole transition-colors text-sm">Software</a></li>
                     </ul>
                  </div>
              </div>

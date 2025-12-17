@@ -3,10 +3,10 @@ import React from 'react';
 const InfiniteMarquee: React.FC = () => {
   return (
     <div className="w-full bg-aureole py-8 overflow-hidden relative border-y border-white/10 z-20">
-      <div className="flex whitespace-nowrap animate-marquee group">
-        {[...Array(4)].map((_, i) => (
-          <div key={i} className="flex items-center mx-4">
-            <span className="text-3xl md:text-5xl font-black tracking-tight uppercase flex items-center gap-16 text-white/90">
+      <div className="flex whitespace-nowrap animate-marquee">
+        {[...Array(2)].map((_, i) => (
+          <div key={i} className="flex items-center">
+            <span className="text-3xl md:text-5xl font-black tracking-tight uppercase flex items-center gap-12 md:gap-16 px-6 md:px-8 text-white/90">
                <span>AUROBINDO</span>
                <span className="w-3 h-3 rounded-full bg-white/30"></span>
                <span>DABUR</span>
