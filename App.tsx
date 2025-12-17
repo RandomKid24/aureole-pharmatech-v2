@@ -10,15 +10,21 @@ import Products from './components/Products';
 import Services from './components/Services';
 import Software from './components/Software';
 import Careers from './components/Careers';
+import Footer from './components/Footer';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'products' | 'services' | 'software' | 'careers'>('home');
 
+  const navigate = (page: 'home' | 'about' | 'products' | 'services' | 'software' | 'careers') => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
+
   return (
-    <div className="font-sans text-gray-900 bg-surface selection:bg-aureole selection:text-white" id="home">
-      <Navbar onNavigate={(page: string) => setCurrentPage(page as any)} currentPage={currentPage} />
+    <div className="font-sans text-gray-900 bg-surface selection:bg-aureole selection:text-white min-h-screen flex flex-col" id="home">
+      <Navbar onNavigate={navigate} currentPage={currentPage} />
       
-      <main>
+      <main className="flex-grow">
         {currentPage === 'home' && (
           <>
             <Hero />
@@ -49,6 +55,8 @@ const App: React.FC = () => {
           <Careers />
         )}
       </main>
+
+      <Footer onNavigate={navigate} />
     </div>
   );
 };
