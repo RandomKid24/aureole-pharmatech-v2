@@ -1,7 +1,9 @@
+
 export interface TechnicalTable {
   title: string;
   headers: string[];
   rows: string[][];
+  footerNote?: string;
 }
 
 export interface ProductDetail {
@@ -18,6 +20,7 @@ export interface ProductDetail {
   compliance: string[];
   regularAttributes?: string[];
   addOnsAttributes?: string[];
+  imageUrl?: string;
 }
 
 export interface ManifestoItem {
