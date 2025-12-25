@@ -10,62 +10,76 @@ const About: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-surface w-full overflow-x-hidden pt-20">
+    <div className="bg-surface w-full overflow-x-hidden">
       
       {/* ========================================================
-          HERO SECTION
+          HERO SECTION (Synced with Home)
          ======================================================== */}
-      <section className="relative w-full min-h-screen flex flex-col justify-center bg-[#F8F9FA] overflow-hidden pt-20">
+      <section className="relative w-full min-h-screen flex flex-col bg-[#F8F9FA] overflow-hidden pt-32 md:pt-48 pb-20">
         
+        {/* Background Elements */}
         <div className="absolute top-0 left-6 md:left-24 w-px h-full bg-gray-200 z-0 opacity-50"></div>
+        <div className="absolute inset-0 pointer-events-none opacity-[0.03] z-0" 
+             style={{ backgroundImage: 'radial-gradient(#000 0.5px, transparent 0.5px)', backgroundSize: '40px 40px' }}>
+        </div>
+        <div className="absolute top-1/2 right-[-5%] -translate-y-1/2 pointer-events-none select-none z-0">
+           <span className="text-[40vw] font-black text-gray-900/5 leading-none">A</span>
+        </div>
 
-        <div className="container mx-auto px-6 relative z-10">
-          
-          <div className="flex flex-col items-start max-w-full md:max-w-[95vw]">
+        <div className="container mx-auto px-6 md:px-24 relative z-10 flex-grow flex flex-col justify-start">
+          <div className="flex flex-col items-start w-full">
             
-            <div className={`mb-4 md:mb-8 transition-all duration-1000 transform ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-               <span className="inline-block text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-aureole border-b border-aureole pb-2 bg-[#F8F9FA]/50 backdrop-blur-sm pr-4 relative z-10">
-                  Who We Are
-               </span>
+            <div className={`mb-6 md:mb-12 transition-all duration-1000 transform ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+               <div className="flex items-center gap-4">
+                  <span className="w-12 h-px bg-aureole"></span>
+                  <span className="text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase text-aureole">
+                     Our Legacy • Our Future
+                  </span>
+               </div>
             </div>
 
-            <h1 className="text-[14vw] md:text-[12vw] font-black leading-[0.8] tracking-tighter text-gray-900 select-none flex flex-col items-start w-full uppercase relative z-10 mix-blend-darken">
-               <span className={`block transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
-                 About
-               </span>
-               <span className={`block text-aureole transition-transform duration-1000 delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
-                 Aureole
-               </span>
-               <span className={`block text-aureole transition-transform duration-1000 delay-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
-                 Group
-               </span>
-            </h1>
+            <div className="relative w-full">
+              <h1 className="text-[16vw] md:text-[14vw] font-black leading-[0.75] tracking-tighter text-gray-900 select-none uppercase mix-blend-darken flex flex-col">
+                 <span className={`block transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${mounted ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'}`}>
+                   ABOUT
+                 </span>
+                 <span className={`block text-aureole transition-all duration-1000 delay-200 ease-[cubic-bezier(0.16,1,0.3,1)] self-end md:mr-20 ${mounted ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'}`}>
+                   AUREOLE
+                 </span>
+              </h1>
+            </div>
 
-            <div className="mt-12 md:mt-16 w-full flex flex-col md:flex-row items-start md:items-end justify-between gap-12 border-t border-gray-200 pt-8 md:pt-12 bg-[#F8F9FA]/80 backdrop-blur-sm pl-0">
-               
-               <div className={`max-w-2xl transition-all duration-1000 delay-500 transform ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-                  <p className="text-lg md:text-2xl text-gray-500 font-light leading-relaxed">
+            <div className="mt-20 md:mt-32 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-end border-t border-gray-200/60 pt-12">
+               <div className={`lg:col-span-7 transition-all duration-1000 delay-500 transform ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+                  <p className="text-xl md:text-3xl text-gray-500 font-light leading-snug max-w-3xl">
                      {ABOUT_CONTENT.heroDescription}
                   </p>
                </div>
 
-               <div className={`flex items-center gap-12 transition-all duration-1000 delay-700 transform ${mounted ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
-                  <div className="flex flex-col items-start">
-                     <span className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tighter">28+</span>
-                     <span className="text-xs uppercase tracking-widest text-gray-400 mt-1">Years</span>
+               <div className="hidden lg:block lg:col-span-1"></div>
+
+               <div className={`lg:col-span-4 flex items-center justify-center lg:justify-end gap-12 transition-all duration-1000 delay-700 transform ${mounted ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
+                  <div className="flex flex-col items-end">
+                     <span className="text-4xl md:text-6xl font-black text-gray-900 tracking-tighter">28+</span>
+                     <span className="text-[10px] uppercase tracking-widest text-gray-400 font-bold">Years Industry Presence</span>
                   </div>
-                  <div className="h-12 w-px bg-gray-300"></div>
-                  <div className="flex flex-col items-start">
-                     <span className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tighter">5+</span>
-                     <span className="text-xs uppercase tracking-widest text-gray-400 mt-1">Ventures</span>
+                  <div className="h-16 w-px bg-gray-200"></div>
+                  <div className="flex flex-col items-end">
+                     <span className="text-4xl md:text-6xl font-black text-gray-900 tracking-tighter">5+</span>
+                     <span className="text-[10px] uppercase tracking-widest text-gray-400 font-bold">Diverse Ventures</span>
                   </div>
                </div>
-
             </div>
-
           </div>
         </div>
 
+        {/* Brand Indicator */}
+        <div className={`absolute bottom-10 left-6 md:left-24 flex items-center gap-6 transition-opacity duration-1000 delay-1000 z-30 origin-left -rotate-90 md:rotate-0 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
+           <span className="text-[9px] uppercase tracking-[0.5em] font-black text-aureole whitespace-nowrap">Core Values Discovery</span>
+           <div className="w-24 h-px bg-aureole/20 relative overflow-hidden">
+              <div className="absolute top-0 left-0 h-full w-1/2 bg-aureole animate-[marquee_2s_linear_infinite]"></div>
+           </div>
+        </div>
       </section>
 
       {/* ========================================================
@@ -195,6 +209,13 @@ const About: React.FC = () => {
             </div>
          </div>
       </section>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes marquee {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(200%); }
+        }
+      `}} />
     </div>
   );
 };
