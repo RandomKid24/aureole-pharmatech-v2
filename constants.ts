@@ -59,7 +59,7 @@ export const DETAILED_PRODUCTS: Record<string, ProductDetail> = {
     id: "bi-01",
     name: "BOD Incubator",
     category: "Stability Chambers",
-    description: "Advanced BOD (Bio-Oxygen Demand) Incubators designed for precise temperature control in biological oxygen demand testing, microbiological research, and environmental analysis. These incubators provide accurate and uniform temperature conditions essential for reliable biological testing.",
+    description: "Advanced BOD (Bio-Oxygen Demand) Incubators designed for precise temperature control in biological oxygen demand testing, microbiological research, and environmental analysis. These incubators provide accurate and uniform temperature conditions essential for reliable biological testing and research applications.",
     mainFeatures: [
       "Precise temperature control for BOD testing",
       "Advanced sensor technology with high accuracy",
@@ -102,6 +102,383 @@ export const DETAILED_PRODUCTS: Record<string, ProductDetail> = {
       }
     ]
   },
+  "Cold Chamber": {
+    id: "cc-01",
+    name: "Cold Chamber",
+    category: "Stability Chambers",
+    description: "Advanced refrigerated chambers designed for precise low-temperature storage and testing applications. These chambers provide accurate temperature control in the cold range (2°C to 8°C) essential for pharmaceutical storage, biological sample preservation, and controlled environment testing.",
+    mainFeatures: [
+      "Precise low temperature control (2°C to 8°C)",
+      "Advanced refrigeration system with high accuracy",
+      "Uniform temperature distribution",
+      "Energy-efficient operation",
+      "Compliance with international standards",
+      "User-friendly digital interface"
+    ],
+    specifications: [
+      { label: "Temperature Range", value: "2°C to 8°C" },
+      { label: "Accuracy", value: "± 1°C" },
+      { label: "Uniformity", value: "± 2°C" }
+    ],
+    compliance: ["ICH Guidelines", "USFDA 21 CFR Part 11", "GMP", "ISO Certified"],
+    regularAttributes: [
+      "Inner outer door with proof silicon",
+      "Master & stand by sensor"
+    ],
+    addOnsAttributes: [
+      "21 CFR part 11 Compliance",
+      "Standby Refrigeration System",
+      "Scanner: 4 pt. temperature sensor",
+      "Mobile Alert System",
+      "Hooter System",
+      "Door Access System (Numeric/Biometric)",
+      "Extra Trays"
+    ],
+    tables: [
+      {
+        title: "Product Specifications Table",
+        headers: ["Model", "Capacity (L)", "Int. Dim. (WxDxH)", "Ext. Dim. (WxDxH)", "Trays", "Power Supply"],
+        rows: [
+          ["AP_SA_CC-1.25_V**", "125", "600 x 350 x 600 mm", "725 x 685 x 1250 mm", "2", "Single Phase 230 V"],
+          ["AP_SA_CC-2.0_V**", "200", "660 x 450 x 700 mm", "785 x 780 x 1350 mm", "2", "Single Phase 230 V"],
+          ["AP_SA_CC-4.0_V**", "400", "700 x 650 x 900 mm", "825 x 985 x 1550 mm", "3", "Single Phase 230 V"],
+          ["AP_SA_CC-6.0_V**", "600", "750 x 750 x 1075 mm", "875 x 1085 x 1725 mm", "3", "Single Phase 230 V"],
+          ["AP_SA_CC-8.0_V**", "800", "750 x 750 x 1425 mm", "875 x 1085 x 2075 mm", "4", "Single Phase 230 V"],
+          ["AP_SA_CC-1.0K_V**", "1000", "850 x 750 x 1575 mm", "975 x 1085 x 2225 mm", "4", "Single Phase 230 V"]
+        ]
+      }
+    ]
+  },
+  "Deep Freezer (upto -20°C / upto -40°C)": {
+    id: "df-01",
+    name: "Deep Freezer (upto -20°C / upto -40°C)",
+    category: "Stability Chambers",
+    description: "Advanced ultra-low temperature freezers designed for long-term storage of sensitive biological materials, vaccines, and critical samples. These freezers provide precise temperature control in the ultra-low range essential for pharmaceutical storage, research applications, and sample preservation.",
+    mainFeatures: [
+      "Ultra-low temperature operation (-5°C to -20°C / -25°C to -40°C)",
+      "Heavy duty refrigeration system with high accuracy",
+      "Uniform temperature distribution",
+      "Advanced temperature monitoring and control",
+      "Compliance with international standards",
+      "User-friendly digital interface"
+    ],
+    specifications: [
+      { label: "Temperature Range", value: "-5°C to -20°C / -25°C to -40°C" },
+      { label: "Accuracy", value: "± 3°C" },
+      { label: "Uniformity", value: "± 5°C" }
+    ],
+    compliance: ["ICH Guidelines", "USFDA 21 CFR Part 11", "GMP", "ISO Certified"],
+    regularAttributes: [
+      "Master & stand by sensor",
+      "SS Door with gasket",
+      "Heavy Duty refrigeration system"
+    ],
+    addOnsAttributes: [
+      "21 CFR part 11 Compliance",
+      "Mobile Alert System",
+      "Hooter System",
+      "Extra Trays"
+    ],
+    tables: [
+      {
+        title: "Product Specifications Table",
+        headers: ["Model", "Capacity (L)", "Int. Dim. (WxDxH)", "Ext. Dim. (WxDxH)", "Trays", "Power Supply"],
+        rows: [
+          ["AP_SA_DF-1.25_V**", "125", "625 x 400 x 500 mm", "810 x 700 x 1260 mm", "2", "Single Phase 230 V"],
+          ["AP_SA_DF-2.0_V**", "200", "650 x 500 x 625 mm", "835 x 800 x 1385 mm", "2", "Single Phase 230 V"],
+          ["AP_SA_DF-4.0_V**", "400", "700 x 650 x 900 mm", "885 x 950 x 1660 mm", "3", "Single Phase 230 V"],
+          ["AP_SA_DF-6.0_V**", "600", "750 x 800 x 1000 mm", "935 x 1100 x 1760 mm", "3", "Single Phase 230 V"],
+          ["AP_SA_DF-8.0_V**", "800", "750 x 800 x 1350 mm", "935 x 1100 x 2110 mm", "4", "Single Phase 230 V"],
+          ["AP_SA_DF-1.0K_V**", "1000", "825 x 825 x 1500 mm", "1010 x 1125 x 2260 mm", "4", "Single Phase 230 V"]
+        ]
+      }
+    ]
+  },
+  "Ultra Low Deep Freezer (-80°C)": {
+    id: "uldf-01",
+    name: "Ultra Low Deep Freezer (-80°C)",
+    category: "Stability Chambers",
+    description: "Advanced ultra-low temperature freezers designed for critical storage of biological samples, vaccines, and research materials at temperatures down to -86°C. These specialized freezers provide precise ultra-low temperature control essential for long-term preservation of sensitive biological materials and pharmaceutical applications.",
+    mainFeatures: [
+      "Ultra-low temperature operation (-40°C to -86°C)",
+      "Heavy duty refrigeration system with high accuracy",
+      "Master & stand by sensor for reliability",
+      "SS Door with gasket for optimal sealing",
+      "Quick release filter for easy maintenance",
+      "One-hand operation handle for convenience"
+    ],
+    specifications: [
+      { label: "Temperature Range", value: "-40°C to -86°C" },
+      { label: "Accuracy", value: "± 5°C" },
+      { label: "Uniformity", value: "± 5°C" }
+    ],
+    compliance: ["ICH Guidelines", "USFDA 21 CFR Part 11", "GMP", "ISO Certified"],
+    regularAttributes: [
+      "Master & stand by sensor",
+      "SS Door with gasket",
+      "Heavy duty refrigeration system",
+      "Quick release filter",
+      "One-hand operation handle",
+      "Vacuum release port for quick re-access to samples",
+      "Lock the cold air inner door closing pressure can be adjusted by the handle"
+    ],
+    addOnsAttributes: [
+      "21 CFR part 11 Compliance",
+      "Mobile Alert System",
+      "Hooter System",
+      "Extra Trays"
+    ],
+    tables: [
+      {
+        title: "Product Specifications Table",
+        headers: ["Model", "Capacity (L)", "Int. Dim. (WxDxH)", "Ext. Dim. (WxDxH)", "Trays", "Power Supply"],
+        rows: [
+          ["AP_SA_DF-3.4_V**", "340", "488 x 607 x 1140 mm", "854 x 1006 x 1907 mm", "3", "Single Phase 230 V"],
+          ["AP_SA_DF-4.08_V**", "408", "606 x 575 x 1180 mm", "872 x 1028 x 1945 mm", "3", "Single Phase 230 V"],
+          ["AP_SA_DF-5.88_V**", "588", "606 x 738 x 1310 mm", "872 x 1192 x 1994 mm", "3", "Single Phase 230 V"],
+          ["AP_SA_DF-7.28_V**", "728", "963 x 571 x 1350 mm", "1229 x 1012 x 1994 mm", "3", "Single Phase 230 V"],
+          ["AP_SA_DF-8.38_V**", "838", "894 x 718 x 1310 mm", "1160 x 1172 x 1994 mm", "3", "Single Phase 230 V"]
+        ]
+      }
+    ]
+  },
+  "Photostability Chamber": {
+    id: "phc-01",
+    name: "Photostability Chamber",
+    category: "Stability Chambers",
+    description: "Advanced photostability chambers designed specifically to meet ICH & FDA requirements for photostability testing. These chambers provide simultaneous Near UV & visible light testing according to ICH Q1B option 2, ensuring compliance with regulatory standards for drug substance and drug product photostability studies.",
+    mainFeatures: [
+      "ICH Q1B compliant with FDA requirements",
+      "Simultaneous Near UV & visible light testing",
+      "Uniform light distribution for accurate testing",
+      "Automatic light control with exposure level monitoring",
+      "Master & stand by sensor for reliability",
+      "Two Door system with full view inner glass door & outer SS door"
+    ],
+    specifications: [
+      { label: "Temperature Range", value: "20°C to 50°C" },
+      { label: "Accuracy", value: "± 0.2°C" },
+      { label: "Uniformity", value: "± 1°C" }
+    ],
+    compliance: ["ICH Q1B Option 2", "USFDA 21 CFR Part 11", "GMP", "ISO Certified"],
+    regularAttributes: [
+      "Inner Mirror finish & outer Matt finish",
+      "UV lights get switched off automatically once the door is opened",
+      "Tests the sample on Fluorescent light or U.V. lights",
+      "Uniform light distribution",
+      "Lights automatically shut off after specific exposure level",
+      "Master & stand by sensor",
+      "Two Door: Full view inner glass door & outer SS door & leakage proof silicon rubber gasket"
+    ],
+    addOnsAttributes: [
+      "21 CFR part 11 Compliance",
+      "UV Meter",
+      "LUX Meter",
+      "Mobile Alert System",
+      "Hooter System",
+      "Door Access System (Numeric/Biometric)",
+      "Extra Trays"
+    ],
+    tables: [
+      {
+        title: "Product Specifications Table",
+        headers: ["Model", "Capacity (L)", "Int. Dim. (WxDxH)", "Ext. Dim. (WxDxH)", "Trays", "Power Supply"],
+        rows: [
+          ["AP_SA_PH-2.0_V**", "200", "800 x 500 x 600 mm", "925 x 850 x 1300 mm", "1", "Single Phase 230 V"],
+          ["AP_SA_PH-4.0_V**", "400", "800 x 700 x 700 mm", "925 x 1050 x 1400 mm", "2", "Single Phase 230 V"]
+        ]
+      }
+    ]
+  },
+  "Pharma Refrigerator / Dual Zone Chamber": {
+    id: "dzc-01",
+    name: "Pharma Refrigerator / Dual Zone Chamber",
+    category: "Stability Chambers",
+    description: "Advanced dual-zone chambers designed for pharmaceutical applications, providing precise temperature control in two separate zones - an upper deep freezer zone and a lower cold chamber zone. These chambers ensure optimal storage conditions for different types of pharmaceutical products requiring different temperature ranges.",
+    mainFeatures: [
+      "Master & stand by sensor for reliability",
+      "SS Door with gasket for optimal sealing",
+      "Heavy Duty refrigeration system with high performance",
+      "Inner outer door with proof silicon for enhanced insulation",
+      "Dual zone temperature control for different storage requirements",
+      "Compliance with pharmaceutical storage standards"
+    ],
+    specifications: [
+      { label: "Upper Zone Temp Range", value: "-5°C to -20°C" },
+      { label: "Upper Zone Accuracy", value: "± 3°C" },
+      { label: "Upper Zone Uniformity", value: "± 5°C" },
+      { label: "Lower Zone Temp Range", value: "2°C to 8°C" },
+      { label: "Lower Zone Accuracy", value: "± 1°C" },
+      { label: "Lower Zone Uniformity", value: "± 2°C" }
+    ],
+    compliance: ["USFDA 21 CFR Part 11", "ICH Guidelines", "GMP", "ISO Certified"],
+    regularAttributes: [
+      "Master & stand by sensor",
+      "SS Door with gasket",
+      "Heavy Duty refrigeration system",
+      "Inner outer door with proof silicon"
+    ],
+    addOnsAttributes: [
+      "21 CFR part 11 Compliance",
+      "Mobile Alert System",
+      "Hooter System",
+      "Extra Trays",
+      "Scanner: 4 pt. temperature sensor",
+      "Door Access System (Numeric/Biometric)"
+    ],
+    tables: [
+      {
+        title: "Product Specifications Table",
+        headers: ["Model", "Zone", "Capacity (L)", "Int. Dim. (WxDxH)", "Trays", "Ext. Dim. (WxDxH)", "Power Supply"],
+        rows: [
+          ["AP_DC_DF-1.0_CC-1.0_V**", "Upper / Lower", "100 / 100", "640x350x500 / 640x350x600", "1 / 1", "825 x 850 x 2055 mm", "Single Phase 230 V"],
+          ["AP_DC_DF-2.0_CC-2.0_V**", "Upper / Lower", "200 / 200", "700x575x500 / 700x475x600", "2 / 2", "885 x 975 x 2055 mm", "Single Phase 230 V"],
+          ["AP_DC_DF-1.0_CC-2.0_V**", "Upper / Lower", "100 / 200", "700x350x450 / 700x475x600", "1 / 2", "885 x 975 x 2010 mm", "Single Phase 230 V"],
+          ["AP_DC_DF-2.0_CC-4.0_V**", "Upper / Lower", "200 / 400", "800x500x500 / 800x600x850", "2 / 3", "985 x 1100 x 2300 mm", "Single Phase 230 V"]
+        ]
+      }
+    ]
+  },
+  "Hot Air Oven": {
+    id: "hao-01",
+    name: "Hot Air Oven",
+    category: "Stability Chambers",
+    description: "Advanced hot air ovens designed for controlled heating environments ideal for curing, drying, sterilization, and conducting high-temperature tests. These ovens provide uniform heat distribution and precise temperature control for various laboratory and industrial applications.",
+    mainFeatures: [
+      "High temperature capability up to 250°C",
+      "Uniform heat distribution for consistent results",
+      "Digital control system with precise temperature control",
+      "Advanced safety features and thermal insulation",
+      "Stainless steel construction for durability",
+      "Multiple tray configurations for different applications"
+    ],
+    specifications: [
+      { label: "Temperature Range", value: "10°C above ambient to 250°C" },
+      { label: "Accuracy", value: "± 1°C" },
+      { label: "Uniformity", value: "± 5°C" }
+    ],
+    compliance: ["ICH Guidelines", "USFDA 21 CFR Part 11", "GMP", "ISO Certified"],
+    regularAttributes: [
+      "High temperature capability",
+      "Uniform heat distribution",
+      "Digital control system",
+      "Safety features"
+    ],
+    addOnsAttributes: [
+      "21 CFR part 11 Compliance",
+      "Mobile Alert System",
+      "Hooter System",
+      "Extra Trays",
+      "Scanner: 4 pt. temperature sensor",
+      "Door Access System (Numeric/Biometric)"
+    ],
+    tables: [
+      {
+        title: "Product Specifications Table",
+        headers: ["Model", "Capacity (L)", "Int. Dim. (WxDxH)", "Ext. Dim. (WxDxH)", "Trays", "Power Supply"],
+        rows: [
+          ["AP_SA_HO2-1.0_V**", "100", "450 x 450 x 500 mm", "575 x 865 x 1260 mm", "2", "Single Phase 230 V"],
+          ["AP_SA_HO2-1.5_V**", "150", "500 x 500 x 600 mm", "625 x 965 x 1360 mm", "2", "Single Phase 230 V"],
+          ["AP_SA_HO2-2.0_V**", "200", "600 x 500 x 675 mm", "725 x 965 x 1435 mm", "2", "Single Phase 230 V"],
+          ["AP_SA_HO2-2.5_V**", "250", "600 x 600 x 700 mm", "725 x 1065 x 1460 mm", "3", "Single Phase 230 V"],
+          ["APSA_HO2-3.0_V**", "300", "600 x 600 x 850 mm", "725 x 1065 x 1610 mm", "4", "Single Phase 230 V"]
+        ]
+      }
+    ]
+  },
+  "Vacuum Oven": {
+    id: "vo-01",
+    name: "Vacuum Oven",
+    category: "Stability Chambers",
+    description: "Advanced vacuum ovens designed for applications requiring controlled atmosphere and uniform heating under vacuum conditions. These precision ovens are ideal for drying, curing, degassing, and other processes that require both temperature control and vacuum environment for optimal results.",
+    mainFeatures: [
+      "High vacuum capability up to 760 mm of mercury (-30)",
+      "Precise temperature control with ±1°C accuracy",
+      "Uniform heating distribution under vacuum conditions",
+      "Advanced safety interlocks and vacuum monitoring",
+      "Digital display for temperature and vacuum pressure",
+      "Toughened glass window for sample viewing during operation"
+    ],
+    specifications: [
+      { label: "Temperature Range", value: "60°C to 200°C" },
+      { label: "Accuracy", value: "± 1°C" },
+      { label: "Uniformity", value: "± 5°C" },
+      { label: "Vacuum", value: "760 mm of mercury (-30)" }
+    ],
+    compliance: ["ICH Guidelines", "USFDA 21 CFR Part 11", "GMP", "ISO Certified"],
+    regularAttributes: [
+      "High vacuum capability",
+      "Precise temperature control",
+      "Uniform heating",
+      "Safety interlocks",
+      "Digital display for temperature and vacuum",
+      "Toughened glass window for sample viewing"
+    ],
+    addOnsAttributes: [
+      "21 CFR part 11 Compliance",
+      "Mobile Alert System",
+      "Hooter System",
+      "Extra Trays",
+      "Scanner: 4 pt. temperature sensor",
+      "Door Access System (Numeric/Biometric)"
+    ],
+    tables: [
+      {
+        title: "Product Specifications Table",
+        headers: ["Model", "Capacity (L)", "Int. Dim. (WxDxH)", "Ext. Dim. (WxDxH)", "Trays", "Power Supply"],
+        rows: [
+          ["AP_SA_VO-0.15_V**", "15", "22.5 Dia. x 30 Depth x 22.5 Dia.", "28.5 x 36 x 28.5 mm", "Not specified", "Single Phase 230 V"],
+          ["AP_SA_VO-0.21_V**", "21", "30 Dia. x 30 Depth x 30 Dia.", "36 x 36 x 36 mm", "Not specified", "Single Phase 230 V"],
+          ["AP_SA_VO-0.27_V**", "27", "30 Dia. x 38 Depth x 30 Dia.", "36 x 44 x 36 mm", "Not specified", "Single Phase 230 V"]
+        ]
+      }
+    ]
+  },
+  "Muffle Furnace": {
+    id: "mf-01",
+    name: "Muffle Furnace",
+    category: "Stability Chambers",
+    description: "Advanced high-temperature furnaces designed for heat treatment, material processing, and laboratory applications requiring precise temperature control up to 1150°C. These furnaces provide uniform heating and are essential for various industrial and research processes.",
+    mainFeatures: [
+      "High temperature operation up to 1150°C",
+      "Precise temperature control with ±5°C accuracy",
+      "Uniform heating distribution",
+      "Advanced safety features and thermal insulation",
+      "Digital control system with user-friendly interface",
+      "Robust construction for industrial applications"
+    ],
+    specifications: [
+      { label: "Temperature Range", value: "1150°C" },
+      { label: "Accuracy", value: "± 5°C" }
+    ],
+    compliance: ["ICH Guidelines", "USFDA 21 CFR Part 11", "GMP", "ISO Certified"],
+    regularAttributes: [
+      "High temperature operation",
+      "Precise temperature control",
+      "Uniform heating",
+      "Safety features",
+      "Digital control system",
+      "Thermal insulation"
+    ],
+    addOnsAttributes: [
+      "21 CFR part 11 Compliance",
+      "Mobile Alert System",
+      "Hooter System",
+      "Extra Trays",
+      "Scanner: 4 pt. temperature sensor",
+      "Door Access System (Numeric/Biometric)"
+    ],
+    tables: [
+      {
+        title: "Product Specifications Table",
+        headers: ["Model", "Capacity (L)", "Int. Dim. (WxDxH)", "Ext. Dim. (WxDxH)", "Trays", "Power Supply"],
+        rows: [
+          ["AP_SA_MF-0.6_V**", "6", "150 x 300 x 150 mm", "225 x 375 x 225 mm", "Not specified", "Single Phase 230 V"],
+          ["AP_SA_MF-0.12_V**", "12", "200 x 300 x 200 mm", "275 x 375 x 275 mm", "Not specified", "Single Phase 230 V"]
+        ]
+      }
+    ]
+  },
   "Walk In Humidity Chamber": {
     id: "whc-01",
     name: "Walk In Humidity Chamber",
@@ -137,7 +514,6 @@ export const DETAILED_PRODUCTS: Record<string, ProductDetail> = {
   }
 };
 
-// ... rest of the file remains the same ...
 export const MANIFESTO_ITEMS: ManifestoItem[] = [
   {
     letter: 'A',
@@ -651,7 +1027,6 @@ export const CAREERS_CONTENT = {
         "Manage complete sales cycle: Enquiry → Order Generation → Order Closure",
         "Prepare and manage documentation (Quotations, Work Orders)",
         "Handle end-to-end responsibility for each enquiry/order",
-        "Participate in outdoor client visits and frequent travel",
         "Participate in outdoor client visits and frequent travel",
         "Support promotional activities & exhibition preparation",
         "Understand product specifications, applications, and technical aspects",
