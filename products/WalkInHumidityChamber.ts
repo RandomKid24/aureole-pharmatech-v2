@@ -5,6 +5,7 @@ export const WalkInHumidityChamber: ProductDetail = {
   name: "Walk In Humidity Chamber",
   category: "Walk In Chambers",
   description: "Aureole PharmaTech's walk-in humidity chambers are meticulously crafted with the purpose of creating controlled environments for studying and assessing the impacts of different environmental factors such as humidity and temperature. These test chambers find applications in a wide range of fields, including microbiology, plant studies, tissue research, electronic component testing, and various customized industrial and research endeavors. Our humidity test chambers are utilized in R&D laboratories, research projects, and product testing facilities.",
+  imageUrl: "https://v5.airtableusercontent.com/v3/f/as/s/1740614400000/FfLpW4R7_S7uS-f4m0-s7g/T8p_PzV-w8gZ-vX9v_S7uS-f4m0-s7g/walk_in_chamber.png",
   mainFeatures: [
     "Full Door is of toughened glass",
     "Racks with trays",

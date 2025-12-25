@@ -5,6 +5,7 @@ export const DeepFreezer: ProductDetail = {
   name: "Deep Freezer (upto -20°C / upto -40°C)",
   category: "Stability Chambers",
   description: "Advanced ultra-low temperature freezers designed for long-term storage of sensitive biological materials, vaccines, and critical samples. These freezers provide precise temperature control in the ultra-low range essential for pharmaceutical storage, research applications, and sample preservation.",
+  imageUrl: "https://v5.airtableusercontent.com/v3/f/as/s/1740614400000/FfLpW4R7_S7uS-f4m0-s7g/T8p_PzV-w8gZ-vX9v_S7uS-f4m0-s7g/deep_freezer.png",
   mainFeatures: [
     "Ultra-low temperature operation (-5°C to -20°C / -25°C to -40°C)",
     "Heavy duty refrigeration system with high accuracy",

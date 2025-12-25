@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { CAREERS_CONTENT, CONTACT_INFO } from '../constants';
 import { Briefcase, TrendingUp, Lightbulb, Heart, ChevronDown, CheckCircle2, Clock, ArrowRight } from 'lucide-react';
 
-const Careers: React.FC = () => {
+interface CareersProps {
+  onNavigate: (page: any) => void;
+}
+
+const Careers: React.FC<CareersProps> = ({ onNavigate }) => {
   const [expandedJob, setExpandedJob] = useState<number | null>(null);
   const [mounted, setMounted] = useState(false);
 
@@ -34,6 +38,13 @@ const Careers: React.FC = () => {
          <div className="container mx-auto px-6 md:px-24 relative z-10 flex-grow flex flex-col justify-start">
             <div className="flex flex-col items-start w-full">
                
+               {/* Breadcrumbs */}
+               <div className={`flex items-center gap-3 mb-6 transition-all duration-700 transform ${mounted ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
+                <button onClick={() => onNavigate('home')} className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400 hover:text-aureole transition-colors">HOME</button>
+                <span className="text-aureole font-black">/</span>
+                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-900">CAREERS</span>
+               </div>
+
                <div className={`mb-6 md:mb-12 transition-all duration-1000 transform ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                   <div className="flex items-center gap-4">
                      <span className="w-12 h-px bg-aureole"></span>

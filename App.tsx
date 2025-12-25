@@ -58,23 +58,23 @@ const App: React.FC = () => {
         )}
         
         {currentPage === 'about' && (
-          <About />
+          <About onNavigate={navigate} />
         )}
 
         {currentPage === 'products' && (
-          <Products />
+          <Products onNavigate={navigate} />
         )}
 
         {currentPage === 'services' && (
-          <Services />
+          <Services onNavigate={navigate} />
         )}
 
         {currentPage === 'software' && (
-          <Software />
+          <Software onNavigate={navigate} />
         )}
 
         {currentPage === 'careers' && (
-          <Careers />
+          <Careers onNavigate={navigate} />
         )}
       </main>
 
