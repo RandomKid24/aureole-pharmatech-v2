@@ -1,3 +1,25 @@
+export interface TechnicalTable {
+  title: string;
+  headers: string[];
+  rows: string[][];
+}
+
+export interface ProductDetail {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  mainFeatures: string[];
+  specifications: {
+    label: string;
+    value: string;
+  }[];
+  tables?: TechnicalTable[];
+  compliance: string[];
+  regularAttributes?: string[];
+  addOnsAttributes?: string[];
+}
+
 export interface ManifestoItem {
   letter: string;
   title: string;
@@ -19,7 +41,7 @@ export interface ProductItem {
 export interface NavLink {
   label: string;
   href: string;
-  action?: 'home' | 'about' | 'products' | 'services' | 'software' | 'careers'; // Added 'careers'
+  action?: 'home' | 'about' | 'products' | 'services' | 'software' | 'careers';
 }
 
 export interface VentureItem {
@@ -30,7 +52,6 @@ export interface VentureItem {
   linkHref: string;
 }
 
-// New Types for Product Page
 export interface StandardItem {
   title: string;
   subtitle: string;
@@ -48,20 +69,18 @@ export interface ProductCategory {
   groups: ProductSubCategory[];
 }
 
-// New Types for Services Page
 export interface ServiceFeature {
   title: string;
   description: string;
-  icon: string; // Identifier for the icon component
+  icon: string;
 }
 
 export interface ServiceLocation {
   city: string;
-  x: number; // Percentage 0-100 from left
-  y: number; // Percentage 0-100 from top
+  x: number;
+  y: number;
 }
 
-// New Types for Software Page
 export interface SoftwareFeature {
   label: string;
 }
@@ -71,7 +90,6 @@ export interface SoftwareBenefit {
   description: string;
 }
 
-// New Types for Careers Page
 export interface JobPosting {
   title: string;
   experience: string;

@@ -1,8 +1,143 @@
-import { ManifestoItem, ProductItem, NavLink, VentureItem, StandardItem, ProductCategory, ServiceFeature, ServiceLocation, SoftwareFeature, SoftwareBenefit, JobPosting, CareerBenefit } from './types';
+import { ManifestoItem, ProductItem, NavLink, VentureItem, StandardItem, ProductCategory, ServiceFeature, ServiceLocation, SoftwareFeature, SoftwareBenefit, JobPosting, CareerBenefit, ProductDetail } from './types';
 
-// ==================================================================================
-// MANIFESTO / VALUES SECTION ("The Aureole Standard")
-// ==================================================================================
+// Detailed Product Information for Technical Overlays
+export const DETAILED_PRODUCTS: Record<string, ProductDetail> = {
+  "Humidity Chamber / Stability Chamber": {
+    id: "hc-01",
+    name: "Humidity Chamber / Stability Chamber",
+    category: "Stability Chambers",
+    description: "Advanced humidity and stability chambers designed for precise environmental control in pharmaceutical, biotech, and research applications. These chambers provide accurate temperature and humidity conditions for stability testing, formulation development, and regulatory compliance.",
+    mainFeatures: [
+      "Precise temperature and humidity control",
+      "Advanced sensor technology",
+      "User-friendly interface",
+      "Compliance with ICH, WHO, GMP, MHRA and FDA standards",
+      "Energy-efficient operation",
+      "Uniform airflow design"
+    ],
+    specifications: [
+      { label: "Temperature Range", value: "20°C to 60°C" },
+      { label: "Humidity Range", value: "40% to 95% RH" },
+      { label: "Temperature Accuracy", value: "± 0.2°C" },
+      { label: "Humidity Accuracy", value: "± 2.0% RH" },
+      { label: "Temperature Uniformity", value: "± 1.0°C" },
+      { label: "Humidity Uniformity", value: "± 3.0% RH" },
+      { label: "Test Suitable for", value: "25°C & 60% RH, 30°C & 65% RH, 40°C & 75% RH, 30°C & 75% RH" },
+      { label: "Low conditions available", value: "25°C & 40% RH, 40°C & 25% RH, 30°C & 35% RH" }
+    ],
+    compliance: ["ICH Q1A (R2)", "WHO Guidelines", "USFDA 21 CFR Part 11", "GMP", "MHRA"],
+    regularAttributes: [
+      "Inner outer door with proof silicon",
+      "Water & steam Tank",
+      "Low water indication",
+      "Master & stand by sensor"
+    ],
+    addOnsAttributes: [
+      "21 CFR part 11 Compliance",
+      "Standby Refrigeration & Steam Generation System",
+      "Scanner: 4 pt. temperature & humidity sensor",
+      "Mobile Alert System",
+      "Hooter System",
+      "Door Access System (Numeric/Biometric)",
+      "Extra Trays"
+    ],
+    tables: [
+      {
+        title: "Product Specifications Table",
+        headers: ["Model", "Capacity (L)", "Int. Dim. (WxDxH)", "Ext. Dim. (WxDxH)", "Trays", "Power Supply"],
+        rows: [
+          ["AP_SA_HC-2.0_V**", "200", "660 x 450 x 700 mm", "785 x 780 x 1350 mm", "2", "Single Phase 230 V"],
+          ["AP_SA_HC-4.0_V**", "400", "700 x 650 x 900 mm", "825 x 985 x 1550 mm", "3", "Single Phase 230 V"],
+          ["AP_SA_HC-6.0_V**", "600", "750 x 750 x 1075 mm", "875 x 1085 x 1725 mm", "3", "Single Phase 230 V"],
+          ["AP_SA_HC-8.0_V**", "800", "750 x 750 x 1425 mm", "875 x 1085 x 2075 mm", "4", "Single Phase 230 V"],
+          ["AP_SA_HC-1.0K_V**", "1000", "850 x 750 x 1575 mm", "975 x 1085 x 2225 mm", "4", "Single Phase 230 V"]
+        ]
+      }
+    ]
+  },
+  "BOD Incubator": {
+    id: "bi-01",
+    name: "BOD Incubator",
+    category: "Stability Chambers",
+    description: "Advanced BOD (Bio-Oxygen Demand) Incubators designed for precise temperature control in biological oxygen demand testing, microbiological research, and environmental analysis. These incubators provide accurate and uniform temperature conditions essential for reliable biological testing.",
+    mainFeatures: [
+      "Precise temperature control for BOD testing",
+      "Advanced sensor technology with high accuracy",
+      "Uniform temperature distribution",
+      "Energy-efficient operation",
+      "Compliance with international standards",
+      "User-friendly digital interface"
+    ],
+    specifications: [
+      { label: "Temperature Range", value: "10°C to 60°C" },
+      { label: "Accuracy", value: "± 0.2°C" },
+      { label: "Uniformity", value: "± 1.0°C" }
+    ],
+    compliance: ["ICH Guidelines", "USFDA 21 CFR Part 11", "GMP", "ISO Certified"],
+    regularAttributes: [
+      "Inner outer door with proof silicon",
+      "Master & stand by sensor"
+    ],
+    addOnsAttributes: [
+      "FDA 21 CFR part 11 Compliance",
+      "Standby Refrigeration System (for BOD Only)",
+      "Scanner: 4 pt. temperature sensor",
+      "Mobile Alert System",
+      "Hooter System",
+      "Door Access System (Numeric/Biometric)",
+      "Extra Trays"
+    ],
+    tables: [
+      {
+        title: "Product Specifications Table",
+        headers: ["Model", "Capacity (L)", "Int. Dim. (WxDxH)", "Ext. Dim. (WxDxH)", "Trays", "Power Supply"],
+        rows: [
+          ["AP_SA_BO/BI-1.25_V**", "125", "600 x 350 x 600 mm", "725 x 685 x 1250 mm", "2", "Single Phase 230 V"],
+          ["AP_SA_BO/BI-2.0_V**", "200", "660 x 450 x 700 mm", "785 x 780 x 1350 mm", "2", "Single Phase 230 V"],
+          ["AP_SA_BO/BI-4.0_V**", "400", "700 x 650 x 900 mm", "825 x 985 x 1550 mm", "3", "Single Phase 230 V"],
+          ["AP_SA_BO/BI-6.0_V**", "600", "750 x 750 x 1075 mm", "875 x 1085 x 1725 mm", "3", "Single Phase 230 V"],
+          ["AP_SA_BO/BI-8.0_V**", "800", "750 x 750 x 1425 mm", "875 x 1085 x 2075 mm", "4", "Single Phase 230 V"],
+          ["AP_SA_BO/BI-1.0K_V**", "1000", "850 x 750 x 1575 mm", "975 x 1085 x 2225 mm", "4", "Single Phase 230 V"]
+        ]
+      }
+    ]
+  },
+  "Walk In Humidity Chamber": {
+    id: "whc-01",
+    name: "Walk In Humidity Chamber",
+    category: "Walk In Chambers",
+    description: "Designed for large-scale stability testing and long-term storage of pharmaceutical products. Our chambers provide precise control over temperature and humidity across the entire internal volume, exceeding ICH guidelines for stability testing.",
+    mainFeatures: [
+      "21 CFR Part 11 compliant software control",
+      "Redundant cooling systems for 24/7 reliability",
+      "High-accuracy capacitive humidity sensors",
+      "Standard and customized interior volumes available",
+      "Advanced airflow management for uniform distribution"
+    ],
+    specifications: [
+      { label: "Temperature Range", value: "20.0°C to 60.0°C" },
+      { label: "Humidity Range", value: "40% to 95% RH" },
+      { label: "Temperature Accuracy", value: "±0.5°C" },
+      { label: "Humidity Accuracy", value: "±2.0% RH" },
+      { label: "Uniformity", value: "±1.0°C / ±3% RH" }
+    ],
+    compliance: ["ICH Q1A (R2)", "WHO Guidelines", "USFDA 21 CFR Part 11"],
+    tables: [
+      {
+        title: "Standard Models & Capacity",
+        headers: ["Model No.", "Internal Dimensions (WxDxH)", "Volume (Liters)", "No. of Shelves"],
+        rows: [
+          ["A-WI-400", "2000 x 2000 x 2000 mm", "8000 L", "Adjustable"],
+          ["A-WI-600", "2500 x 2500 x 2200 mm", "13750 L", "Adjustable"],
+          ["A-WI-800", "3000 x 3000 x 2200 mm", "19800 L", "Adjustable"],
+          ["Custom", "As per client requirement", "Up to 500k L", "Customizable"]
+        ]
+      }
+    ]
+  }
+};
+
+// ... rest of the file remains the same ...
 export const MANIFESTO_ITEMS: ManifestoItem[] = [
   {
     letter: 'A',
@@ -41,9 +176,6 @@ export const MANIFESTO_ITEMS: ManifestoItem[] = [
   }
 ];
 
-// ==================================================================================
-// PRODUCTS SECTION (Sticky Scroll - Home Page)
-// ==================================================================================
 export const PRODUCTS: ProductItem[] = [
   {
     id: 1,
@@ -80,9 +212,6 @@ export const PRODUCTS: ProductItem[] = [
   }
 ];
 
-// ==================================================================================
-// NAVIGATION
-// ==================================================================================
 export const NAV_LINKS: NavLink[] = [
   { label: 'Home', href: '#home', action: 'home' },
   { label: 'About', href: '#about', action: 'about' },
@@ -93,9 +222,6 @@ export const NAV_LINKS: NavLink[] = [
   { label: 'Careers', href: '#careers', action: 'careers' },
 ];
 
-// ==================================================================================
-// ABOUT PAGE CONTENT
-// ==================================================================================
 export const ABOUT_CONTENT = {
   heroTitle: "About Aureole Group",
   heroDescription: "A dynamic family of companies spanning pharmaceutical solutions, process equipment, animal healthcare, social outreach, and hospitality—all grounded in quality, innovation, and integrity.",
@@ -171,9 +297,6 @@ export const VENTURES: VentureItem[] = [
   }
 ];
 
-// ==================================================================================
-// FULL PRODUCT CATALOG (New Product Page)
-// ==================================================================================
 export const PRODUCT_STANDARDS: StandardItem[] = [
   { title: "ICH Guidelines", subtitle: "International Council for Harmonisation" },
   { title: "CE Approved", subtitle: "European Conformity Standards" },
@@ -187,37 +310,27 @@ export const PRODUCT_CATALOG: ProductCategory[] = [
     description: "Stability chambers are precision-engineered environmental control systems designed to provide accurate and consistent temperature and humidity conditions. They play a vital role in the pharmaceutical industry, ensuring that products maintain their quality, safety, and efficacy throughout their intended shelf life.",
     groups: [
       {
-        title: "Walk In Chambers",
-        items: [
-          "Walk In Humidity Chamber",
-          "Walk In Cold Chamber",
-          "Walk In BOD Incubator",
-          "Walk In Deep Freezer"
-        ]
-      },
-      {
-        title: "Humidity & Stability",
+        title: "Stand Alone Chambers",
         items: [
           "Humidity Chamber / Stability Chamber",
-          "Photostability Chamber"
-        ]
-      },
-      {
-        title: "Incubators & Ovens",
-        items: [
           "BOD Incubator",
+          "Cold Chamber",
+          "Deep Freezer (upto -20°C / upto -40°C)",
+          "Ultra Low Deep Freezer (-80°C)",
+          "Photostability Chamber",
+          "Pharma Refrigerator / Dual Zone Chamber",
           "Hot Air Oven",
           "Vacuum Oven",
           "Muffle Furnace"
         ]
       },
       {
-        title: "Temperature Control",
+        title: "Walk In Chambers",
         items: [
-          "Cold Chamber",
-          "Deep Freezer (upto -20°C / upto -40°C)",
-          "Ultra Low Deep Freezer (-80°C)",
-          "Pharma Refrigerator / Dual Zone Chamber"
+          "Walk In Humidity Chamber",
+          "Walk In Cold Chamber",
+          "Walk In BOD Incubator",
+          "Walk In Deep Freezer"
         ]
       }
     ]
@@ -309,12 +422,9 @@ export const PRODUCT_CATALOG: ProductCategory[] = [
   }
 ];
 
-// ==================================================================================
-// SERVICES PAGE CONTENT
-// ==================================================================================
 export const SERVICE_INTRO = {
   title: "Support Services",
-  subtitle: "In the ever-evolving pharmaceutical landscape, quality and customer service are the cornerstones of success. Aureole Pharma Pvt. Ltd. stands out as a beacon of excellence in this competitive industry."
+  subtitle: "In the ever-evolving pharmaceutical landscape, quality and customer service are the cornerstone of success. Aureole Pharma Pvt. Ltd. stands out as a beacon of excellence in this competitive industry."
 };
 
 export const SERVICE_FEATURES: ServiceFeature[] = [
@@ -360,8 +470,6 @@ export const SERVICE_FEATURES: ServiceFeature[] = [
   }
 ];
 
-// Map coordinates estimated for a typical India SVG projection
-// x: % from left, y: % from top
 export const SERVICE_LOCATIONS: ServiceLocation[] = [
   { city: "Baddi", x: 30, y: 15 },
   { city: "Dehradun", x: 33, y: 18 },
@@ -383,9 +491,6 @@ export const SERVICE_LOCATIONS: ServiceLocation[] = [
   { city: "Chennai", x: 40, y: 82 }
 ];
 
-// ==================================================================================
-// SOFTWARE PAGE CONTENT (SIS-APP)
-// ==================================================================================
 export const SOFTWARE_CONTENT = {
   hero: {
     title: "SIS-APP",
@@ -463,9 +568,6 @@ export const SOFTWARE_CONTENT = {
   }
 };
 
-// ==================================================================================
-// CAREERS PAGE CONTENT
-// ==================================================================================
 export const CAREERS_CONTENT = {
   hero: {
     title: "Join Our Team",
@@ -550,6 +652,7 @@ export const CAREERS_CONTENT = {
         "Prepare and manage documentation (Quotations, Work Orders)",
         "Handle end-to-end responsibility for each enquiry/order",
         "Participate in outdoor client visits and frequent travel",
+        "Participate in outdoor client visits and frequent travel",
         "Support promotional activities & exhibition preparation",
         "Understand product specifications, applications, and technical aspects",
         "Strong communication, interpersonal, and computer skills (MS Excel, PowerPoint, Word)",
@@ -580,16 +683,10 @@ export const CAREERS_CONTENT = {
   ] as JobPosting[]
 };
 
-// ==================================================================================
-// CONTACT INFO (Footer)
-// ==================================================================================
 export const CONTACT_INFO = {
   address: "Plot No. B – 61, Malegaon MIDC, Tal – Sinnar, Dist – Nashik 422 113 Maharashtra, India",
   phone: "+91 86005 22240",
   email: "enquiry@aureolepharmatech.com"
 };
 
-// ==================================================================================
-// MARQUEE TEXT
-// ==================================================================================
 export const MARQUEE_TEXT = "TRUSTED BY AUROBINDO • DABUR • INTAS • ERIS • TCG LIFESCIENCES • RECIPHARM • HETERO • MERIL • ENGINEERING PRECISION • 28 YEARS EXPERIENCE • ";
