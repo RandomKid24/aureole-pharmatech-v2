@@ -246,9 +246,12 @@ export const PRODUCT_CATALOG: ProductCategory[] = [
           "Steam Bath",
           "Oil Bath",
           "Dry Bath",
-          "Chilled Circulating Bath",
-          "Refrigerated Circular Bath"
+          "Chilled Circulating Bath"
         ]
+      },
+      {
+        title: "Refrigerated Circular Bath",
+        items: ["Custom Solutions Available"]
       },
       {
         title: "Air Sampler",
@@ -258,10 +261,8 @@ export const PRODUCT_CATALOG: ProductCategory[] = [
         ]
       },
       {
-        title: "Accessories",
-        items: [
-          "Stainless Steel Items & Accessories"
-        ]
+        title: "Stainless Steel Items & Accessories",
+        items: ["Custom Fabrication"]
       }
     ]
   },
