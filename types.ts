@@ -47,7 +47,7 @@ export interface ProductItem {
 export interface NavLink {
   label: string;
   href: string;
-  action?: 'home' | 'about' | 'products' | 'services' | 'software' | 'careers';
+  action?: 'home' | 'about' | 'products' | 'services' | 'software' | 'careers' | 'events';
 }
 
 export interface VentureItem {
@@ -108,4 +108,17 @@ export interface JobPosting {
 export interface CareerBenefit {
   title: string;
   description: string;
+}
+
+export interface EventItem {
+  id: string;
+  title: string;
+  date: string;
+  location: string;
+  description?: string;
+  type: 'upcoming' | 'exhibition' | 'corporate';
+  imageUrl: string;
+  gallery: string[];
+  status: 'Completed' | 'Upcoming';
+  stallInfo?: string;
 }

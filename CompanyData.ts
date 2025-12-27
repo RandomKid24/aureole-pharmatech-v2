@@ -1,5 +1,4 @@
-
-import { ManifestoItem, VentureItem, JobPosting, CareerBenefit, SoftwareBenefit, NavLink, ServiceFeature, ServiceLocation } from './types';
+import { ManifestoItem, VentureItem, JobPosting, CareerBenefit, SoftwareBenefit, NavLink, ServiceFeature, ServiceLocation, EventItem } from './types';
 
 export const NAV_LINKS: NavLink[] = [
   { label: 'Home', href: '#home', action: 'home' },
@@ -7,8 +6,131 @@ export const NAV_LINKS: NavLink[] = [
   { label: 'Products', href: '#products', action: 'products' },
   { label: 'Services', href: '#services', action: 'services' },
   { label: 'Software', href: '#software', action: 'software' },
-  { label: 'Events', href: '#events', action: 'home' },
+  { label: 'Events', href: '#events', action: 'events' },
   { label: 'Careers', href: '#careers', action: 'careers' },
+];
+
+/**
+ * LOGICAL FOLDER STRUCTURE GUIDE:
+ * ------------------------------
+ * Upcoming Exhibitions: /assets/events/upcoming-exhibition/[event-folder-name]/
+ * Past Exhibitions:     /assets/events/past-exhibition/[event-folder-name]/
+ * Past Events:          /assets/events/past-event/[event-folder-name]/
+ */
+
+export const EVENTS: EventItem[] = [
+  {
+    id: "upcoming-01",
+    title: "Analytica Anacon India 2025",
+    date: "September 18-20, 2025",
+    location: "Hitex Exhibition Centre, Hyderabad",
+    stallInfo: "Hall-01, Stall No-H1-C32",
+    description: "India's premier analytical, biotechnology, and laboratory technology exhibition showcasing cutting-edge innovations in pharmaceutical and life sciences industries.",
+    type: "upcoming",
+    status: "Upcoming",
+    imageUrl: "/assets/events/upcoming-exhibition/analytica-anacon-2025/main.jpg",
+    gallery: [
+      "/assets/events/upcoming-exhibition/analytica-anacon-2025/1.jpg",
+      "/assets/events/upcoming-exhibition/analytica-anacon-2025/2.jpg"
+    ]
+  },
+  {
+    id: "upcoming-02",
+    title: "CPHI Milan 2025",
+    date: "October 08-10, 2025",
+    location: "Fiera Milano, Italy",
+    stallInfo: "International Pavilion",
+    description: "The heart of pharma. Join us in Milan as we present our latest 21 CFR compliant stability solutions to the global pharmaceutical community.",
+    type: "upcoming",
+    status: "Upcoming",
+    imageUrl: "/assets/events/upcoming-exhibition/cphi-milan-2025/main.jpg",
+    gallery: ["/assets/events/upcoming-exhibition/cphi-milan-2025/1.jpg"]
+  },
+  {
+    id: "exh-2025-01",
+    title: "PharmaTech Expo Gujarat 2025",
+    date: "March 15-17, 2025",
+    location: "Gujarat, India",
+    description: "Leading pharmaceutical technology exhibition showcasing latest innovations in pharmaceutical equipment and laboratory technology.",
+    type: "exhibition",
+    status: "Completed",
+    imageUrl: "/assets/events/past-exhibition/pharmatech-gujarat-2025/thumb.jpg",
+    gallery: [
+      "/assets/events/past-exhibition/pharmatech-gujarat-2025/1.jpg",
+      "/assets/events/past-exhibition/pharmatech-gujarat-2025/2.jpg",
+      "/assets/events/past-exhibition/pharmatech-gujarat-2025/3.jpg"
+    ]
+  },
+  {
+    id: "exh-2025-02",
+    title: "PharmaTech Expo – Chandigarh 2025",
+    date: "April 20-22, 2025",
+    location: "Chandigarh, India",
+    description: "Northern India's premier pharmaceutical technology and equipment exhibition.",
+    type: "exhibition",
+    status: "Completed",
+    imageUrl: "/assets/events/past-exhibition/pharmatech-chandigarh-2025/thumb.jpg",
+    gallery: [
+      "/assets/events/past-exhibition/pharmatech-chandigarh-2025/1.jpg",
+      "/assets/events/past-exhibition/pharmatech-chandigarh-2025/2.jpg"
+    ]
+  },
+  {
+    id: "exh-2024-03",
+    title: "India Lab Expo Hyderabad",
+    date: "August 5-7, 2024",
+    location: "Hyderabad, India",
+    description: "Southern India's premier laboratory technology and analytical equipment exhibition.",
+    type: "exhibition",
+    status: "Completed",
+    imageUrl: "/assets/events/past-exhibition/india-lab-hyderabad-2024/thumb.jpg",
+    gallery: [
+      "/assets/events/past-exhibition/india-lab-hyderabad-2024/1.jpg",
+      "/assets/events/past-exhibition/india-lab-hyderabad-2024/2.jpg"
+    ]
+  },
+  {
+    id: "corp-2025-01",
+    title: "Independence Day Celebration 2025",
+    date: "August 15, 2025",
+    location: "Company Headquarters",
+    description: "Celebrating India's independence with cultural programs and team activities.",
+    type: "corporate",
+    status: "Completed",
+    imageUrl: "/assets/events/past-event/independence-day-2025/thumb.jpg",
+    gallery: [
+      "/assets/events/past-event/independence-day-2025/1.jpg",
+      "/assets/events/past-event/independence-day-2025/2.jpg"
+    ]
+  },
+  {
+    id: "corp-2025-02",
+    title: "Women's Day Celebration 2025",
+    date: "March 8, 2025",
+    location: "Company Headquarters",
+    description: "Honoring women's achievements and contributions in the workplace.",
+    type: "corporate",
+    status: "Completed",
+    imageUrl: "/assets/events/past-event/womens-day-2025/thumb.jpg",
+    gallery: [
+      "/assets/events/past-event/womens-day-2025/1.jpg",
+      "/assets/events/past-event/womens-day-2025/2.jpg"
+    ]
+  },
+  {
+    id: "corp-2025-03",
+    title: "Inauguration Day",
+    date: "January 26, 2025",
+    location: "Company Headquarters",
+    description: "Celebrating the inauguration of our new facility and expansion.",
+    type: "corporate",
+    status: "Completed",
+    imageUrl: "/assets/events/past-event/inauguration-2025/thumb.jpg",
+    gallery: [
+      "/assets/events/past-event/inauguration-2025/1.jpg",
+      "/assets/events/past-event/inauguration-2025/2.jpg"
+    ]
+  }
 ];
 
 export const MANIFESTO_ITEMS: ManifestoItem[] = [
@@ -244,7 +366,6 @@ export const CONTACT_INFO = {
 
 export const MARQUEE_TEXT = "TRUSTED BY AUROBINDO • DABUR • INTAS • ERIS • TCG LIFESCIENCES • RECIPHARM • HETERO • MERIL • ENGINEERING PRECISION • 28 YEARS EXPERIENCE • ";
 
-// Added ABOUT_CONTENT for About page to fix error in About.tsx
 export const ABOUT_CONTENT = {
   heroDescription: "Since 1996, Aureole Pharma-Tech has been at the forefront of environmental control technology, providing critical infrastructure for global pharmaceutical research and quality control.",
   director: {
@@ -269,12 +390,10 @@ export const ABOUT_CONTENT = {
   ]
 };
 
-// Added SERVICE_INTRO for Services page to fix error in Services.tsx
 export const SERVICE_INTRO = {
   subtitle: "We provide comprehensive support and maintenance services globally."
 };
 
-// Added SERVICE_FEATURES for Services page to fix error in Services.tsx
 export const SERVICE_FEATURES: ServiceFeature[] = [
   {
     title: "On-Site Installation",
@@ -298,7 +417,6 @@ export const SERVICE_FEATURES: ServiceFeature[] = [
   }
 ];
 
-// Added SERVICE_LOCATIONS for Services page to fix error in Services.tsx
 export const SERVICE_LOCATIONS: ServiceLocation[] = [
   { city: "Mumbai", x: 20, y: 70 },
   { city: "Hyderabad", x: 40, y: 75 },

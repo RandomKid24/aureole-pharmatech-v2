@@ -11,13 +11,14 @@ import Products from './components/Products';
 import Services from './components/Services';
 import Software from './components/Software';
 import Careers from './components/Careers';
+import Events from './components/Events';
 import Footer from './components/Footer';
 
 const App: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'products' | 'services' | 'software' | 'careers'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'products' | 'services' | 'software' | 'careers' | 'events'>('home');
   const [showBackToTop, setShowBackToTop] = useState(false);
 
-  const navigate = (page: 'home' | 'about' | 'products' | 'services' | 'software' | 'careers') => {
+  const navigate = (page: 'home' | 'about' | 'products' | 'services' | 'software' | 'careers' | 'events') => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
@@ -75,6 +76,10 @@ const App: React.FC = () => {
 
         {currentPage === 'careers' && (
           <Careers onNavigate={navigate} />
+        )}
+
+        {currentPage === 'events' && (
+          <Events onNavigate={navigate} />
         )}
       </main>
 
