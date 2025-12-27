@@ -1,4 +1,3 @@
-
 export interface TechnicalTable {
   title: string;
   headers: string[];
@@ -21,6 +20,10 @@ export interface ProductDetail {
   regularAttributes?: string[];
   addOnsAttributes?: string[];
   imageUrl?: string;
+  galleryItems?: {
+    label: string;
+    imageUrl: string;
+  }[];
 }
 
 export interface ManifestoItem {

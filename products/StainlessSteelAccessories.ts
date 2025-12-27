@@ -4,48 +4,32 @@ export const StainlessSteelAccessories: ProductDetail = {
   id: "tt-ss-acc",
   name: "Stainless Steel Items & Accessories",
   category: "Table Top Instruments",
-  description: "High-quality stainless steel accessories and components for laboratory equipment including test tube racks, weight rings, exposing stands, swab plates, and lids & stands. Engineered for durability and high-grade sterilization standards in pharmaceutical and research environments.",
-  imageUrl: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1000&auto=format&fit=crop",
+  description: "High-quality stainless steel accessories and components for laboratory equipment including test tube racks, weight rings, exposing stands, swab plates, and lids & stands.",
   mainFeatures: [
-    "High-grade SS 304 / SS 316 construction",
-    "Corrosion resistant and easy to sterilize",
-    "Precision engineered for laboratory compatibility",
-    "Ergonomic designs for easy manipulation",
-    "Customizable sizes for specific applications",
-    "Durable finish suitable for cleanroom use"
+    "High-grade SS 304/316 construction",
+    "Corrosion resistant finish",
+    "Precision dimensions for standard lab-ware",
+    "Durable and autoclavable",
+    "Customizable configurations available"
   ],
-  specifications: [
-    { label: "Material", value: "SS 304 / SS 316 L Grade" },
-    { label: "Finish", value: "Mirror / Matte / Electro-polished" },
-    { label: "Application", value: "Laboratories, QC, R&D, Production" },
-    { label: "Durability", value: "Acid and Alkali resistant" },
-    { label: "Customization", value: "Available as per client requirement" }
+  specifications: [],
+  compliance: ["ISO 9001:2015", "GMP Compliant"],
+  galleryItems: [
+    { label: "Test Tube Racks - Sheet", imageUrl: "https://v5.airtableusercontent.com/v3/f/as/s/1740614400000/FfLpW4R7_S7uS-f4m0-s7g/T8p_PzV-w8gZ-vX9v_S7uS-f4m0-s7g/ultrasonic_bath.png" },
+    { label: "Test Tube Racks - Wire Mesh", imageUrl: "https://v5.airtableusercontent.com/v3/f/as/s/1740614400000/FfLpW4R7_S7uS-f4m0-s7g/T8p_PzV-w8gZ-vX9v_S7uS-f4m0-s7g/ultrasonic_bath.png" },
+    { label: "Weight Rings", imageUrl: "https://v5.airtableusercontent.com/v3/f/as/s/1740614400000/FfLpW4R7_S7uS-f4m0-s7g/T8p_PzV-w8gZ-vX9v_S7uS-f4m0-s7g/ultrasonic_bath.png" },
+    { label: "Exposing Stands", imageUrl: "https://v5.airtableusercontent.com/v3/f/as/s/1740614400000/FfLpW4R7_S7uS-f4m0-s7g/T8p_PzV-w8gZ-vX9v_S7uS-f4m0-s7g/ultrasonic_bath.png" },
+    { label: "Swab Plates - Box", imageUrl: "https://v5.airtableusercontent.com/v3/f/as/s/1740614400000/FfLpW4R7_S7uS-f4m0-s7g/T8p_PzV-w8gZ-vX9v_S7uS-f4m0-s7g/ultrasonic_bath.png" },
+    { label: "Swab Plates - Plate", imageUrl: "https://v5.airtableusercontent.com/v3/f/as/s/1740614400000/FfLpW4R7_S7uS-f4m0-s7g/T8p_PzV-w8gZ-vX9v_S7uS-f4m0-s7g/ultrasonic_bath.png" },
+    { label: "Swab Plates - Perforated", imageUrl: "https://v5.airtableusercontent.com/v3/f/as/s/1740614400000/FfLpW4R7_S7uS-f4m0-s7g/T8p_PzV-w8gZ-vX9v_S7uS-f4m0-s7g/ultrasonic_bath.png" },
+    { label: "Lid & Stands - Tray", imageUrl: "https://v5.airtableusercontent.com/v3/f/as/s/1740614400000/FfLpW4R7_S7uS-f4m0-s7g/T8p_PzV-w8gZ-vX9v_S7uS-f4m0-s7g/ultrasonic_bath.png" },
+    { label: "Lid & Stands - Blocks", imageUrl: "https://v5.airtableusercontent.com/v3/f/as/s/1740614400000/FfLpW4R7_S7uS-f4m0-s7g/T8p_PzV-w8gZ-vX9v_S7uS-f4m0-s7g/ultrasonic_bath.png" },
+    { label: "Lid & Stands - Mesh Rack", imageUrl: "https://v5.airtableusercontent.com/v3/f/as/s/1740614400000/FfLpW4R7_S7uS-f4m0-s7g/T8p_PzV-w8gZ-vX9v_S7uS-f4m0-s7g/ultrasonic_bath.png" }
   ],
-  compliance: ["GMP Standards", "ISO Certified", "FDA Compliant Materials"],
   regularAttributes: [
-    "Test Tube Racks - Sheet",
-    "Test Tube Racks - Wire Mesh",
-    "Weight Rings",
-    "Exposing Stands",
-    "Swab Plates - Box",
-    "Swab Plates - Plate",
-    "Swab Plates - Perforated",
-    "Lid & Stands - Tray",
-    "Lid & Stands - Blocks",
-    "Lid & Stands - Mesh Rack"
-  ],
-  tables: [
-    {
-      title: "Available Accessory Range",
-      headers: ["CATEGORY", "AVAILABLE TYPES", "TYPICAL APPLICATION"],
-      rows: [
-        ["Test Tube Racks", "Sheet Type / Wire Mesh Type", "Sample Organization & Transport"],
-        ["Weight Rings", "Vinyl Coated / Specialized", "Stabilizing Volumetric Flasks"],
-        ["Swab Plates", "Box / Plate / Perforated", "Environmental Monitoring & Sampling"],
-        ["Stands", "Exposing / Lid & Stands", "Equipment Support & Component Storage"],
-        ["Storage Blocks", "Custom Perforated Blocks", "Precision Tool Holding"]
-      ],
-      footerNote: "All items are manufactured with high-precision CNC machining for smooth edges and safety."
-    }
+    "Industries Served: Pharmaceuticals",
+    "Industries Served: Food & Beverage",
+    "Industries Served: Research Institutes",
+    "Industries Served: Chemical Processing"
   ]
 };

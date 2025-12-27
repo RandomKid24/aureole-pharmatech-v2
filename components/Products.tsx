@@ -3,20 +3,17 @@ import {
   CheckCircle2, 
   Settings, 
   ChevronLeft, 
-  ArrowRight, 
-  ClipboardList,
-  Target,
-  Plus,
-  Search,
-  Info,
-  Layers,
-  ShieldCheck,
-  Maximize2,
-  Activity,
-  Box,
-  Cpu,
-  Menu,
-  X
+  Menu, 
+  X, 
+  Wrench, 
+  Sun, 
+  ClipboardList, 
+  Layers, 
+  PlusCircle,
+  ArrowRight,
+  Image as ImageIcon,
+  LayoutGrid,
+  ShieldCheck
 } from 'lucide-react';
 import { PRODUCT_CATALOG, DETAILED_PRODUCTS } from '../constants';
 import { TechnicalTable } from '../types';
@@ -38,7 +35,6 @@ const Products: React.FC<ProductsProps> = ({ onNavigate }) => {
     setMounted(true);
   }, []);
 
-  // Smooth scroll to top when the selected sub-product changes
   useEffect(() => {
     if (contentStageRef.current) {
       contentStageRef.current.scrollTo({ top: 0, behavior: 'smooth' });
@@ -47,8 +43,14 @@ const Products: React.FC<ProductsProps> = ({ onNavigate }) => {
 
   const handleExploreCategory = (id: string) => {
     setActiveCategoryId(id);
+    const cat = PRODUCT_CATALOG.find(c => c.id === id);
+    if (cat && cat.groups.length > 0) {
+      // Find the first item in this category that actually has a detailed entry
+      const allItems = cat.groups.flatMap(g => g.items);
+      const firstAvailable = allItems.find(item => !!DETAILED_PRODUCTS[item]) || allItems[0];
+      setSelectedSubProduct(firstAvailable);
+    }
     setViewState('explorer');
-    setSelectedSubProduct(null); // Default to category overview
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -58,437 +60,296 @@ const Products: React.FC<ProductsProps> = ({ onNavigate }) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const resetToCategory = () => {
-    setSelectedSubProduct(null);
-    if (contentStageRef.current) {
-      contentStageRef.current.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
   const currentCategory = PRODUCT_CATALOG.find(c => c.id === activeCategoryId);
   const activeProduct = selectedSubProduct ? DETAILED_PRODUCTS[selectedSubProduct] : null;
 
   const renderTable = (table: TechnicalTable) => (
-    <div className="w-full mt-6 md:mt-8 mb-10 overflow-x-auto scrollbar-hide border border-aureole/30 shadow-sm">
-      <table className="w-full text-left border-collapse min-w-[700px] md:min-w-[900px]">
+    <div className="w-full mt-8 mb-12 overflow-x-auto border border-gray-100 rounded-2xl bg-white shadow-sm">
+      <table className="w-full text-left border-collapse min-w-[800px]">
         <thead>
-          <tr className="bg-aureole text-white">
+          <tr className="bg-gray-50/50">
             {table.headers.map((h, i) => (
-              <th key={i} className="px-4 md:px-5 py-4 text-[10px] font-black uppercase tracking-[0.2em]">{h}</th>
+              <th key={i} className="px-6 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 border-b border-gray-100">{h}</th>
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-aureole/10">
+        <tbody className="divide-y divide-gray-50">
           {table.rows.map((row, rIdx) => (
-            <tr key={rIdx} className="hover:bg-aureole/5 transition-colors group">
+            <tr key={rIdx} className="hover:bg-blue-50/30 transition-colors">
               {row.map((cell, cIdx) => (
-                <td key={cIdx} className={`px-4 md:px-5 py-4 text-[11px] font-semibold ${cIdx === 0 ? 'text-gray-900 bg-aureole/5 border-r border-aureole/10' : 'text-gray-600'}`}>
-                  {cell === "✓" ? <CheckCircle2 size={16} className="text-aureole" /> : cell}
+                <td key={cIdx} className={`px-6 py-5 text-[12px] ${cIdx === 0 ? 'font-bold text-gray-900 border-r border-gray-50' : 'text-gray-500 font-light'}`}>
+                  {cell === "✓" || cell === "Yes" ? <CheckCircle2 size={16} className="text-aureole" /> : cell}
                 </td>
               ))}
             </tr>
           ))}
         </tbody>
       </table>
-      {table.footerNote && (
-        <div className="p-4 md:p-5 bg-white border-t border-aureole/20">
-          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-relaxed">
-            <span className="text-aureole mr-2 md:mr-4 font-black">REMARK:</span> {table.footerNote}
-          </p>
-        </div>
-      )}
     </div>
   );
 
   return (
-    <div className="bg-surface w-full min-h-screen text-gray-900 selection:bg-aureole selection:text-white relative flex flex-col">
+    <div className="bg-surface w-full min-h-screen relative flex flex-col pt-20">
       
-      {/* ARCHITECTURAL SPINE & GRID */}
-      <div className="fixed top-0 left-6 md:left-24 w-px h-full bg-gray-200 z-0 opacity-50 pointer-events-none"></div>
-      <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-0" 
-           style={{ backgroundImage: 'radial-gradient(#000 0.5px, transparent 0.5px)', backgroundSize: '40px 40px' }}>
-      </div>
+      {viewState === 'catalog' && (
+        <div className="flex-grow">
+          {/* Catalog Header */}
+          <section className="relative w-full overflow-hidden pt-12 md:pt-24 pb-20 px-6 md:px-24">
+            <div className="absolute top-0 left-6 md:left-24 w-px h-full bg-gray-200 z-0 opacity-50 pointer-events-none"></div>
+            <div className="absolute inset-0 pointer-events-none opacity-[0.03] z-0" 
+                 style={{ backgroundImage: 'radial-gradient(#000 0.5px, transparent 0.5px)', backgroundSize: '40px 40px' }}>
+            </div>
+            <div className="absolute top-1/2 right-[-5%] -translate-y-1/2 pointer-events-none select-none z-0">
+               <span className="text-[40vw] font-black text-gray-900/5 leading-none">P</span>
+            </div>
 
-      <div className="relative z-10 flex flex-col flex-grow">
-        
-        {/* ========================================================
-            VIEW: CATALOG GRID
-           ======================================================== */}
-        {viewState === 'catalog' && (
-          <div className="flex-grow">
-            <section className="relative w-full min-h-screen flex flex-col overflow-hidden pt-32 md:pt-48 pb-20">
-              <div className="absolute top-1/2 right-[-5%] -translate-y-1/2 pointer-events-none select-none z-0">
-                 <span className="text-[40vw] font-black text-gray-900/5 leading-none">P</span>
+            <div className="relative z-10">
+              <div className={`flex items-center gap-3 mb-6 transition-all duration-700 transform ${mounted ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
+                <button onClick={() => onNavigate('home')} className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400 hover:text-aureole transition-colors">HOME</button>
+                <span className="text-aureole font-black">/</span>
+                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-900">PRODUCTS</span>
               </div>
+              <h1 className="text-[16vw] md:text-[12vw] font-black leading-[0.75] tracking-tighter text-gray-900 uppercase flex flex-col">
+                 <span className="block">DATA</span>
+                 <span className="block text-aureole self-end md:mr-20">CATALOG</span>
+              </h1>
+            </div>
+          </section>
 
-              <div className="container mx-auto px-6 md:px-24 relative z-10 flex-grow flex flex-col justify-start">
-                <div className="flex flex-col items-start w-full">
-                  
-                  {/* Breadcrumbs */}
-                  <div className={`flex items-center gap-3 mb-6 transition-all duration-700 transform ${mounted ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
-                    <button onClick={() => onNavigate('home')} className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400 hover:text-aureole transition-colors">HOME</button>
-                    <span className="text-aureole font-black">/</span>
-                    <span className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-900">PRODUCTS</span>
-                  </div>
-
-                  <div className={`mb-6 md:mb-12 transition-all duration-1000 transform ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                     <div className="flex items-center gap-4">
-                        <span className="w-12 h-px bg-aureole"></span>
-                        <span className="text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase text-aureole">
-                           Technical Asset Database • Precision v2.5
-                        </span>
-                     </div>
-                  </div>
-
-                  <div className="relative w-full">
-                    <h1 className="text-[16vw] md:text-[14vw] font-black leading-[0.75] tracking-tighter text-gray-900 select-none uppercase mix-blend-darken flex flex-col">
-                       <span className={`block transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${mounted ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'}`}>
-                         DATA
-                       </span>
-                       <span className={`block text-aureole transition-all duration-1000 delay-200 ease-[cubic-bezier(0.16,1,0.3,1)] self-end md:mr-20 ${mounted ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'}`}>
-                         CATALOG
-                       </span>
-                    </h1>
-                  </div>
-
-                  <div className="mt-20 md:mt-32 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-end border-t border-gray-200/60 pt-12">
-                     <div className={`lg:col-span-7 transition-all duration-1000 delay-500 transform ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-                        <p className="text-lg md:text-2xl text-gray-500 font-light leading-snug max-w-3xl">
-                           Access our <span className="text-gray-900 font-medium">integrated technical ecosystem</span>. Every component is engineered for regulatory compliance and unmatched stability in critical pharmaceutical environments.
-                        </p>
-                     </div>
-                     <div className="hidden lg:block lg:col-span-1"></div>
-                     <div className={`lg:col-span-4 flex items-center justify-center lg:justify-end gap-12 transition-all duration-1000 delay-700 transform ${mounted ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
-                        <div className="text-right">
-                           <span className="text-4xl md:text-6xl font-black text-gray-900 tracking-tighter leading-none">150+</span>
-                           <span className="text-[9px] uppercase tracking-widest text-gray-400 font-black block mt-1">Validated Assets</span>
-                        </div>
-                     </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <div className="container mx-auto px-6 md:px-24 pb-32">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-aureole/20">
-                 {PRODUCT_CATALOG.map((cat, idx) => (
-                   <div 
-                      key={cat.id} 
-                      onClick={() => handleExploreCategory(cat.id)}
-                      className="group p-8 md:p-14 border-b border-aureole/10 sm:border-r last:sm:border-r-0 lg:border-r lg:last:border-r-0 hover:bg-white transition-all duration-700 cursor-pointer flex flex-col min-h-[380px] md:min-h-[450px]"
-                    >
-                      <div className="flex justify-between items-start mb-10 md:mb-12">
-                        <span className="text-[10px] font-black text-gray-300 tracking-[0.4em]">SERIES // 0{idx + 1}</span>
-                        <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-gray-100 flex items-center justify-center group-hover:bg-aureole group-hover:text-white group-hover:border-aureole transition-all duration-500">
-                          <ArrowRight size={20} className="-rotate-45 group-hover:rotate-0 transition-all duration-500" />
-                        </div>
-                      </div>
-                      <h3 className="text-2xl md:text-5xl font-black uppercase tracking-tighter text-gray-900 leading-[0.8] mb-6 group-hover:text-aureole transition-colors">{cat.title}</h3>
-                      <p className="text-[12px] md:text-[13px] text-gray-400 font-light leading-relaxed mb-8 flex-grow max-w-xs">{cat.description}</p>
-                      <div className="flex items-center gap-2 flex-wrap">
-                        {cat.groups.slice(0, 3).map((g, gi) => (
-                           <span key={gi} className="text-[7px] md:text-[8px] font-black uppercase tracking-[0.2em] bg-gray-50 px-2 py-1 text-gray-400 group-hover:bg-aureole/5 group-hover:text-aureole transition-all">{g.title}</span>
-                        ))}
-                      </div>
-                   </div>
-                 ))}
-              </div>
+          <div className="container mx-auto px-6 md:px-24 pb-32 relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-gray-200">
+               {PRODUCT_CATALOG.map((cat, idx) => (
+                 <div key={cat.id} onClick={() => handleExploreCategory(cat.id)} className="group p-10 border-b md:border-r border-gray-200 hover:bg-white transition-all cursor-pointer flex flex-col min-h-[400px]">
+                    <span className="text-[10px] font-black text-gray-300 tracking-[0.4em] mb-12 uppercase">Series // 0{idx + 1}</span>
+                    <h3 className="text-4xl font-black uppercase tracking-tighter text-gray-900 mb-6 group-hover:text-aureole transition-colors">{cat.title}</h3>
+                    <p className="text-sm text-gray-400 font-light mb-10 flex-grow leading-relaxed">{cat.description}</p>
+                    <div className="flex items-center gap-4 text-xs font-black uppercase tracking-widest text-gray-300 group-hover:text-aureole transition-colors">
+                      Explore Series <ArrowRight size={16} />
+                    </div>
+                 </div>
+               ))}
             </div>
           </div>
-        )}
+        </div>
+      )}
 
-        {/* ========================================================
-            VIEW: TECHNICAL EXPLORER
-           ======================================================== */}
-        {viewState === 'explorer' && currentCategory && (
-          <div className="flex flex-col h-screen overflow-hidden animate-in fade-in duration-500">
+      {viewState === 'explorer' && currentCategory && (
+        <div className="flex flex-grow h-[calc(100vh-80px)] overflow-hidden">
+          {/* Navigation Spine */}
+          <aside className={`
+            absolute lg:static inset-0 lg:inset-auto z-40 lg:z-10
+            w-full lg:w-[320px] flex flex-col bg-white shrink-0 overflow-y-auto
+            transition-all duration-500 border-r border-gray-100
+            ${isMobileNavOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+          `}>
+            <div className="px-10 py-10 border-b border-gray-50">
+               <button onClick={goBack} className="flex items-center gap-2 text-aureole text-[10px] font-black uppercase tracking-[0.2em] mb-6 hover:-translate-x-1 transition-transform">
+                  <ChevronLeft size={14} strokeWidth={3} /> Back to Catalog
+               </button>
+               <h2 className="text-2xl font-black text-gray-900 leading-tight uppercase tracking-tighter">{currentCategory.title}</h2>
+            </div>
             
-            <header className="h-16 md:h-20 border-b border-aureole/10 bg-white flex items-center px-4 md:px-12 shrink-0 z-40">
-               <button onClick={goBack} className="p-3 md:p-4 mr-4 md:mr-8 border-r border-gray-100 hover:text-aureole transition-colors group">
-                  <ChevronLeft size={20} strokeWidth={3} className="group-hover:-translate-x-1 transition-transform" />
-               </button>
-               <div className="flex-grow">
-                  <h2 className="text-lg md:text-2xl font-black uppercase tracking-tighter text-gray-900 truncate pr-4">
-                     {currentCategory.title}
-                  </h2>
-               </div>
-               
-               <button 
-                 onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
-                 className="lg:hidden p-2 bg-gray-900 text-white rounded-none hover:bg-aureole transition-colors"
-               >
-                 {isMobileNavOpen ? <X size={18} /> : <Menu size={18} />}
-               </button>
-
-               <div className="hidden xl:flex items-center gap-8">
-                  <div className="text-right">
-                     <span className="text-[8px] font-black text-gray-400 uppercase tracking-widest block mb-0.5">Asset Ref.</span>
-                     <span className="text-[10px] font-bold text-gray-900 uppercase tracking-tight truncate max-w-[150px] inline-block">{selectedSubProduct || 'CAT_OVERVIEW'}</span>
+            <div className="flex flex-col py-6">
+              {currentCategory.groups.map(group => (
+                <div key={group.title}>
+                  <div className="px-10 py-4 bg-gray-50/50">
+                    <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{group.title}</span>
                   </div>
-                  <div className="w-px h-8 bg-gray-100"></div>
-                  <div className="flex items-center gap-3">
-                    <Activity className="text-aureole animate-pulse" size={16} />
-                    <span className="text-[9px] font-black bg-gray-900 text-white px-3 py-1.5 uppercase tracking-widest">Validated</span>
-                  </div>
-               </div>
-            </header>
-
-            <div className="flex flex-grow overflow-hidden bg-white relative">
-              
-              <aside className={`
-                absolute lg:static inset-0 lg:inset-auto z-30 lg:z-10
-                w-full lg:w-72 xl:w-80 flex flex-col border-r border-aureole/10 bg-gray-50 shrink-0 overflow-y-auto scrollbar-hide
-                transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]
-                ${isMobileNavOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-              `}>
-                <div className="p-4 bg-white border-b border-aureole/10 sticky top-0 z-10">
-                   <div className="relative group">
-                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-300 group-hover:text-aureole transition-colors" size={14} />
-                      <input 
-                        type="text" 
-                        placeholder="FILTER ASSETS..." 
-                        className="w-full bg-surface py-2.5 pl-10 text-[9px] font-black uppercase tracking-widest border border-transparent focus:border-aureole outline-none transition-all placeholder:text-gray-300" 
-                      />
-                   </div>
+                  {group.items.map((item, iIdx) => (
+                    <button 
+                      key={iIdx}
+                      onClick={() => { setSelectedSubProduct(item); setIsMobileNavOpen(false); }}
+                      className={`w-full text-left py-4 px-10 text-[11px] font-bold uppercase tracking-[0.15em] transition-all flex items-center justify-between group ${selectedSubProduct === item ? 'text-aureole bg-blue-50/50 border-r-4 border-aureole' : 'text-gray-400 hover:text-gray-900 hover:bg-gray-50/50'}`}
+                    >
+                       <span className={!DETAILED_PRODUCTS[item] ? 'opacity-40 italic' : ''}>{item}</span>
+                       <Sun size={12} className={`transition-transform duration-500 ${selectedSubProduct === item ? 'rotate-90 text-aureole' : 'text-gray-200 group-hover:rotate-45'}`} />
+                    </button>
+                  ))}
                 </div>
+              ))}
+            </div>
+          </aside>
+
+          {/* Content Stage */}
+          <main ref={contentStageRef} className="flex-grow overflow-y-auto scroll-smooth bg-[#F8F9FA] p-8 md:p-16 relative">
+            <div className="lg:hidden fixed bottom-10 right-10 z-50">
+               <button onClick={() => setIsMobileNavOpen(!isMobileNavOpen)} className="w-16 h-16 bg-aureole text-white rounded-full flex items-center justify-center shadow-2xl transition-transform active:scale-90">
+                  {isMobileNavOpen ? <X size={28} /> : <Menu size={28} />}
+               </button>
+            </div>
+
+            {activeProduct ? (
+              <div className="max-w-6xl mx-auto relative z-10 animate-in fade-in slide-in-from-bottom-8 duration-1000">
                 
-                {currentCategory.groups.map((group, gIdx) => (
-                  <div key={gIdx} className="border-b border-gray-100 last:border-b-0">
-                     <h4 className="px-6 py-4 text-[8px] font-black text-gray-400 uppercase tracking-[0.4em] bg-gray-50/80 border-b border-gray-100 flex items-center gap-2">
-                       <Box size={12} /> {group.title}
-                     </h4>
-                     <div className="flex flex-col">
-                        {group.items.map((item, iIdx) => (
-                          <button 
-                            key={iIdx}
-                            onClick={() => {
-                              setSelectedSubProduct(item);
-                              setIsMobileNavOpen(false);
-                            }}
-                            className={`w-full text-left py-4 px-6 text-[11px] font-black uppercase tracking-tight transition-all border-l-4 relative group/item ${selectedSubProduct === item ? 'bg-white text-aureole border-aureole' : 'text-gray-500 border-transparent hover:bg-gray-100 hover:text-gray-900'}`}
-                          >
-                             <div className="flex items-center justify-between">
-                                <span className={`transition-all duration-300 ${selectedSubProduct === item ? 'translate-x-1' : ''}`}>{item}</span>
-                                <ArrowRight size={12} className={`transition-all duration-500 ${selectedSubProduct === item ? 'opacity-100 translate-x-0 text-aureole' : 'opacity-0 -translate-x-3'}`} />
-                             </div>
-                          </button>
+                {/* Header Section */}
+                <div className="mb-16">
+                   <div className="flex items-center gap-4 mb-6">
+                      <span className="h-px w-12 bg-aureole"></span>
+                      <span className="text-[10px] font-black uppercase tracking-[0.4em] text-aureole">Asset Showcase</span>
+                   </div>
+                   <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-gray-900 mb-8 leading-[0.9]">{activeProduct.name}</h1>
+                   <p className="text-lg text-gray-500 font-light leading-relaxed max-w-4xl mb-8">{activeProduct.description}</p>
+                   
+                   {activeProduct.compliance && activeProduct.compliance.length > 0 && (
+                     <div className="flex flex-wrap gap-3">
+                        {activeProduct.compliance.map((std, idx) => (
+                          <div key={idx} className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-100 rounded-full shadow-sm">
+                            <ShieldCheck size={14} className="text-aureole" />
+                            <span className="text-[10px] font-bold text-gray-900 uppercase tracking-widest">{std}</span>
+                          </div>
                         ))}
                      </div>
-                  </div>
-                ))}
-              </aside>
+                   )}
+                </div>
 
-              <main ref={contentStageRef} className="flex-grow overflow-y-auto bg-white scroll-smooth relative">
-                <div className="p-6 md:p-12 lg:p-16 max-w-[1400px]">
-                  
-                  {/* EXPLORER BREADCRUMBS - FULLY FUNCTIONAL */}
-                  <div className="flex flex-wrap items-center gap-3 mb-8 md:mb-12 border-b border-gray-100 pb-6">
-                    <button onClick={() => onNavigate('home')} className="text-[9px] font-black uppercase tracking-[0.4em] text-gray-400 hover:text-aureole transition-colors">HOME</button>
-                    <span className="text-aureole font-black">/</span>
-                    <button onClick={goBack} className="text-[9px] font-black uppercase tracking-[0.4em] text-gray-400 hover:text-aureole transition-colors">PRODUCTS</button>
-                    <span className="text-aureole font-black">/</span>
-                    <button onClick={resetToCategory} className={`text-[9px] font-black uppercase tracking-[0.4em] transition-colors ${!selectedSubProduct ? 'text-gray-900 cursor-default' : 'text-gray-400 hover:text-aureole'}`}>
-                      {currentCategory.title}
-                    </button>
-                    {selectedSubProduct && (
-                      <>
-                        <span className="text-aureole font-black">/</span>
-                        <span className="text-[9px] font-black uppercase tracking-[0.4em] text-gray-900 truncate max-w-[150px]">{selectedSubProduct}</span>
-                      </>
+                {/* Media & Key Specs Showcase (Only if data exists) */}
+                {(activeProduct.imageUrl || (activeProduct.specifications && activeProduct.specifications.length > 0)) && (
+                  <div className="mb-16 bg-white rounded-[3rem] p-8 md:p-16 border border-gray-100 shadow-[0_20px_60px_rgba(0,0,0,0.03)] flex flex-col lg:flex-row gap-16 items-center">
+                    <div className="w-full lg:w-1/2 aspect-square relative rounded-3xl overflow-hidden bg-gray-50 flex items-center justify-center">
+                        {activeProduct.imageUrl ? (
+                          <img 
+                            src={activeProduct.imageUrl} 
+                            alt={activeProduct.name} 
+                            className="w-full h-full object-contain p-8 mix-blend-multiply transition-transform duration-1000 hover:scale-110" 
+                          />
+                        ) : (
+                          <div className="flex flex-col items-center gap-4 text-gray-200">
+                            <ImageIcon size={120} strokeWidth={1} />
+                            <span className="text-[10px] font-black uppercase tracking-widest text-gray-300">Technical Image Pending</span>
+                          </div>
+                        )}
+                    </div>
+                    
+                    {activeProduct.specifications && activeProduct.specifications.length > 0 && (
+                      <div className="w-full lg:w-1/2">
+                        <div className="flex items-center gap-4 mb-8">
+                          <div className="w-10 h-10 bg-aureole/10 rounded-xl flex items-center justify-center text-aureole">
+                              <Settings size={20} />
+                          </div>
+                          <h3 className="text-sm font-black text-gray-900 uppercase tracking-widest">Key Specifications</h3>
+                        </div>
+                        <div className="space-y-4">
+                          {activeProduct.specifications.map((spec, sIdx) => (
+                            <div key={sIdx} className="flex justify-between items-end border-b border-gray-50 pb-3 group">
+                                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest group-hover:text-aureole transition-colors">{spec.label}</span>
+                                <span className="text-sm font-bold text-gray-900 text-right">{spec.value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     )}
                   </div>
+                )}
 
-                  {activeProduct ? (
-                    <div className="animate-in fade-in slide-in-from-bottom-2 duration-700">
-                      <div className="flex flex-col xl:flex-row gap-10 lg:gap-16 mb-16 md:mb-24 border-b border-aureole/20 pb-12 md:pb-16 items-start">
-                         <div className="flex-grow w-full">
-                            <div className="flex items-center gap-2 text-aureole mb-4 md:mb-6">
-                               <Layers size={16} />
-                               <span className="text-[9px] font-black uppercase tracking-[0.5em]">Identity Profile v2</span>
-                            </div>
-                            <h3 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-gray-900 leading-[0.75] mb-8 md:mb-10">
-                              {activeProduct.name}
-                            </h3>
-                            <p className="text-lg md:text-xl lg:text-2xl text-gray-500 font-light leading-snug mb-10 md:mb-14 border-l-4 border-aureole/10 pl-6 italic">
-                               {activeProduct.description}
-                            </p>
-
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-14">
-                               <div>
-                                  <h5 className="text-[10px] md:text-[11px] font-black uppercase tracking-widest text-gray-900 mb-6 flex items-center gap-3">
-                                     <Target className="text-aureole" size={16} /> CAPABILITIES
-                                  </h5>
-                                  <ul className="space-y-4">
-                                     {activeProduct.mainFeatures.map((f, i) => (
-                                       <li key={i} className="flex items-start gap-3 group">
-                                          <div className="w-1.5 h-1.5 rounded-full bg-aureole mt-1.5 shrink-0"></div>
-                                          <span className="text-[11px] md:text-[12px] font-bold text-gray-800 uppercase tracking-tight leading-tight">{f}</span>
-                                       </li>
-                                     ))}
-                                  </ul>
-                               </div>
-                               <div>
-                                  <h5 className="text-[10px] md:text-[11px] font-black uppercase tracking-widest text-gray-900 mb-6 flex items-center gap-3">
-                                     <ShieldCheck className="text-aureole" size={16} /> STANDARDS
-                                  </h5>
-                                  <div className="flex flex-wrap gap-2">
-                                     {activeProduct.compliance.map((c, i) => (
-                                       <span key={i} className="text-[9px] md:text-[10px] font-black border border-aureole/30 px-3 py-2 text-aureole hover:bg-aureole hover:text-white transition-all text-center">{c}</span>
-                                     ))}
-                                  </div>
-                               </div>
-                            </div>
-                         </div>
-
-                         <div className="w-full xl:w-[380px] shrink-0 sticky top-0 z-0">
-                            <div className="aspect-[4/5] bg-surface border border-aureole/10 flex items-center justify-center p-8 overflow-hidden group shadow-sm">
+                {/* Accessories Gallery Grid (Crucial for Table Top Instruments) */}
+                {activeProduct.galleryItems && activeProduct.galleryItems.length > 0 && (
+                  <div className="mb-24 animate-in fade-in duration-1000">
+                    <div className="flex items-center gap-4 mb-10">
+                       <LayoutGrid className="text-aureole" size={24} />
+                       <h3 className="text-sm font-black text-gray-900 uppercase tracking-widest">Accessory Components</h3>
+                    </div>
+                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                       {activeProduct.galleryItems.map((item, gIdx) => (
+                         <div key={gIdx} className="group bg-white rounded-3xl p-6 border border-gray-100 hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
+                            <div className="aspect-square bg-gray-50 rounded-2xl mb-4 flex items-center justify-center overflow-hidden">
                                <img 
-                                 src={activeProduct.imageUrl || "https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?q=80&w=1000&auto=format&fit=crop"} 
-                                 alt={activeProduct.name}
-                                 className="max-h-full w-auto object-contain transition-transform duration-[2s] group-hover:scale-105"
+                                 src={item.imageUrl} 
+                                 alt={item.label} 
+                                 className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500" 
                                />
                             </div>
-                            <div className="mt-6 flex items-center gap-4 text-gray-300">
-                               <div className="h-px flex-grow bg-aureole/10"></div>
-                               <span className="text-[8px] font-black uppercase tracking-[0.5em] whitespace-nowrap">ASSET DATA</span>
-                               <div className="h-px flex-grow bg-aureole/10"></div>
-                            </div>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-gray-900 block text-center leading-tight">
+                              {item.label}
+                            </span>
                          </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mb-16 md:mb-24 items-start">
-                         <div className="lg:col-span-1">
-                            <h5 className="text-[10px] md:text-[11px] font-black uppercase tracking-widest text-gray-900 mb-6 border-b border-aureole/10 pb-4 flex items-center gap-3">
-                               <Settings size={16} className="text-aureole" /> CONFIGURATION
-                            </h5>
-                            <div className="space-y-0.5">
-                               {activeProduct.specifications.map((s, i) => (
-                                 <div key={i} className="py-3 border-b border-gray-100 flex flex-col gap-0.5 hover:bg-aureole/5 px-2 transition-colors group">
-                                    <span className="text-[8px] font-black uppercase text-gray-400 tracking-widest group-hover:text-aureole transition-colors">{s.label}</span>
-                                    <span className="text-[11px] font-bold text-gray-900 uppercase tracking-tight">{s.value}</span>
-                                 </div>
-                               ))}
-                            </div>
-                         </div>
-
-                         <div className="lg:col-span-1 bg-gray-50/50 p-6 md:p-8 border border-gray-200">
-                            <h5 className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-6 md:mb-8 flex items-center gap-3">
-                               <div className="w-4 h-px bg-gray-300"></div> STANDARD ATTR.
-                            </h5>
-                            {activeProduct.regularAttributes && activeProduct.regularAttributes.length > 0 ? (
-                              <div className="space-y-4">
-                                 {activeProduct.regularAttributes.map((attr, idx) => (
-                                   <div key={idx} className="flex items-center gap-3 group">
-                                      <div className="w-6 h-px bg-gray-200 group-hover:bg-aureole transition-all duration-300"></div>
-                                      <span className="text-[11px] font-bold text-gray-600 uppercase tracking-widest leading-tight">{attr}</span>
-                                   </div>
-                                 ))}
-                              </div>
-                            ) : (
-                              <div className="py-8 flex flex-col items-center justify-center text-center opacity-20">
-                                 <Info size={24} className="mb-2" />
-                                 <p className="text-[8px] font-black uppercase tracking-widest">Included Baseline</p>
-                              </div>
-                            )}
-                         </div>
-
-                         <div className="lg:col-span-1 bg-aureole/5 p-6 md:p-8 border border-aureole/10">
-                            <h5 className="text-[10px] font-black uppercase tracking-widest text-aureole mb-6 md:mb-8 flex items-center gap-3">
-                               <Plus size={16} strokeWidth={3} /> ADD-ONS
-                            </h5>
-                            {activeProduct.addOnsAttributes && activeProduct.addOnsAttributes.length > 0 ? (
-                              <div className="grid grid-cols-1 gap-2.5">
-                                 {activeProduct.addOnsAttributes.map((attr, idx) => (
-                                   <div key={idx} className="flex items-center gap-3 p-3 bg-white border border-aureole/5 hover:border-aureole hover:shadow-md transition-all group">
-                                      <Plus size={10} strokeWidth={4} className="text-aureole" />
-                                      <span className="text-[10px] font-black text-gray-900 uppercase tracking-tight">{attr}</span>
-                                   </div>
-                                 ))}
-                              </div>
-                            ) : (
-                              <div className="py-8 flex flex-col items-center justify-center text-center opacity-40">
-                                 <Plus size={24} className="mb-2 text-aureole" />
-                                 <p className="text-[8px] font-black uppercase tracking-widest text-aureole">Custom Modules Ready</p>
-                              </div>
-                            )}
-                         </div>
-                      </div>
-
-                      {activeProduct.tables && activeProduct.tables.length > 0 && (
-                        <div className="pt-16 md:pt-20 border-t-2 border-aureole mt-16 md:mt-24">
-                           <div className="mb-10 md:mb-14 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
-                              <div>
-                                 <h2 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter text-gray-900 leading-none">DATA<br/><span className="text-aureole">MATRIX</span></h2>
-                                 <p className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] text-gray-400 mt-6 max-w-sm leading-relaxed">
-                                    Full capacity sizing and technical validation logs.
-                                 </p>
-                              </div>
-                              <div className="hidden xl:block">
-                                 <ClipboardList size={140} strokeWidth={0.5} className="text-aureole/10" />
-                              </div>
-                           </div>
-
-                           {activeProduct.tables.map((table, tIdx) => (
-                             <div key={tIdx} className="mb-12 md:mb-20">
-                                <div className="flex items-center gap-4 mb-6 md:mb-8">
-                                   <span className="bg-aureole text-white px-4 py-2 text-[10px] font-black tracking-[0.3em]">SEC_0{tIdx + 1}</span>
-                                   <h4 className="text-lg md:text-2xl font-black uppercase tracking-tight text-gray-900">{table.title}</h4>
-                                </div>
-                                {renderTable(table)}
-                             </div>
-                           ))}
-                        </div>
-                      )}
+                       ))}
                     </div>
-                  ) : (
-                    <div className="animate-in fade-in duration-1000 py-10">
-                       <div className="flex flex-col gap-10">
-                          <div>
-                             <span className="text-[10px] font-black uppercase tracking-[0.5em] text-aureole mb-4 block">Series Overview</span>
-                             <h3 className="text-5xl md:text-8xl font-black uppercase tracking-tighter text-gray-900 leading-[0.8] mb-10 max-w-4xl">
-                                {currentCategory.title}
-                             </h3>
-                             <p className="text-xl md:text-3xl text-gray-400 font-light leading-snug max-w-4xl border-l-4 border-aureole/20 pl-8">
-                                {currentCategory.description}
-                             </p>
-                          </div>
+                  </div>
+                )}
 
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-10">
-                             <div className="bg-gray-50 p-12 rounded-[2rem] border border-gray-100">
-                                <h4 className="text-[11px] font-black uppercase tracking-widest text-gray-900 mb-8 flex items-center gap-4">
-                                   <Box size={20} className="text-aureole" /> Available Sub-Groups
-                                </h4>
-                                <div className="grid grid-cols-1 gap-4">
-                                   {currentCategory.groups.map((group, idx) => (
-                                      <div key={idx} className="flex flex-col gap-1 border-b border-gray-200 pb-4 last:border-0">
-                                         <span className="text-[9px] font-black text-aureole uppercase tracking-[0.2em]">{group.title}</span>
-                                         <span className="text-sm font-bold text-gray-500 uppercase tracking-tight">
-                                            {group.items.length} Engineering Assets
-                                         </span>
-                                      </div>
-                                   ))}
-                                </div>
-                             </div>
-                             <div className="flex flex-col justify-center items-center text-center p-12">
-                                <div className="w-24 h-24 rounded-full bg-aureole/5 flex items-center justify-center mb-8">
-                                   <Maximize2 size={40} className="text-aureole animate-pulse" />
-                                </div>
-                                <p className="text-[11px] font-black uppercase tracking-[0.5em] text-gray-300 max-w-xs leading-relaxed">
-                                   Select a technical specification from the sidebar to view detailed validation data.
-                                </p>
-                             </div>
+                {/* Attributes & Add-ons Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-20">
+                  {((activeProduct.regularAttributes && activeProduct.regularAttributes.length > 0) || 
+                    (activeProduct.mainFeatures && activeProduct.mainFeatures.length > 0)) && (
+                    <div className="bg-white rounded-[2.5rem] p-12 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-700">
+                       <div className="flex items-center gap-4 mb-10">
+                          <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-aureole">
+                             <Layers size={24} />
                           </div>
+                          <h3 className="text-sm font-black text-gray-900 uppercase tracking-widest">Standard Attributes</h3>
                        </div>
+                       <ul className="space-y-5">
+                          {(activeProduct.regularAttributes || activeProduct.mainFeatures || []).map((attr, i) => (
+                            <li key={i} className="flex items-start gap-4 group">
+                               <div className="w-2 h-2 rounded-full bg-aureole mt-1.5 flex-shrink-0 shadow-[0_0_10px_rgba(15,133,197,0.4)] group-hover:scale-125 transition-transform"></div>
+                               <span className="text-[13px] font-medium text-gray-500 group-hover:text-gray-900 transition-colors leading-snug">{attr}</span>
+                            </li>
+                          ))}
+                       </ul>
+                    </div>
+                  )}
+
+                  {(activeProduct.addOnsAttributes && activeProduct.addOnsAttributes.length > 0) && (
+                    <div className="bg-white rounded-[2.5rem] p-12 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-700">
+                       <div className="flex items-center gap-4 mb-10">
+                          <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-aureole">
+                             <PlusCircle size={24} />
+                          </div>
+                          <h3 className="text-sm font-black text-gray-900 uppercase tracking-widest">Optional Add-Ons</h3>
+                       </div>
+                       <ul className="space-y-5">
+                          {activeProduct.addOnsAttributes.map((attr, i) => (
+                            <li key={i} className="flex items-start gap-4 group">
+                               <div className="w-2 h-2 rounded-full bg-aureole mt-1.5 flex-shrink-0 shadow-[0_0_10px_rgba(15,133,197,0.4)] group-hover:scale-125 transition-transform"></div>
+                               <span className="text-[13px] font-medium text-gray-500 group-hover:text-gray-900 transition-colors leading-snug">{attr}</span>
+                            </li>
+                          ))}
+                       </ul>
                     </div>
                   )}
                 </div>
-              </main>
 
-            </div>
-          </div>
-        )}
+                {/* Performance Data Tables */}
+                {activeProduct.tables && activeProduct.tables.length > 0 && (
+                  <div className="mt-32">
+                    <div className="flex items-center gap-4 mb-12">
+                       <div className="w-12 h-12 bg-gray-900 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-gray-900/10">
+                          <ClipboardList size={24} />
+                       </div>
+                       <h3 className="text-2xl font-black text-gray-900 uppercase tracking-tighter">Performance Matrix</h3>
+                    </div>
+                    {activeProduct.tables.map((table, tIdx) => (
+                      <div key={tIdx} className="mb-16">
+                        <div className="flex flex-col mb-6">
+                           <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400">0{tIdx + 1} // {table.title}</h4>
+                           {table.footerNote && <p className="text-[10px] text-aureole font-bold uppercase tracking-wider mt-1 italic">{table.footerNote}</p>}
+                        </div>
+                        {renderTable(table)}
+                      </div>
+                    ))}
+                  </div>
+                )}
 
-      </div>
+                {/* Footer CTA */}
+                <div className="mt-32 border-t border-gray-200 pt-16 flex flex-col md:flex-row items-center justify-between gap-12 mb-32 bg-white p-12 md:p-20 rounded-[4rem] shadow-sm">
+                   <div className="max-w-xl text-center md:text-left">
+                      <h3 className="text-4xl md:text-5xl font-black uppercase text-gray-900 mb-4 tracking-tighter">Precision in Every Build</h3>
+                      <p className="text-gray-400 font-light text-lg">Download detailed technical sheets or request a customized quotation for your facility.</p>
+                   </div>
+                   <button className="px-12 py-6 bg-aureole text-white font-black uppercase tracking-[0.2em] text-xs hover:bg-gray-900 transition-all rounded-full shadow-2xl hover:-translate-y-2 active:scale-95 flex items-center gap-4 whitespace-nowrap">
+                      Request Quotation <ArrowRight size={18} />
+                   </button>
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-col h-full items-center justify-center text-center opacity-10 py-32">
+                 <Wrench size={100} className="text-gray-400 mb-10" strokeWidth={1} />
+                 <h3 className="text-5xl font-black uppercase tracking-tighter text-gray-900">Select Precision Asset</h3>
+              </div>
+            )}
+          </main>
+        </div>
+      )}
     </div>
   );
 };
